@@ -1,0 +1,67 @@
+@import "variables.less";
+
+.btn-primary {
+    color: @white-color;
+    background-image: none;
+    background-color: @blue-color;
+    border-color: transparent;
+    font-size: 1rem;
+    border-radius: 2px;
+    // width: 7rem;
+    // height: 3rem;
+
+
+    &:hover, &:focus {
+        background-color: @button-hover-color;
+        border-color: transparent;
+    }
+}
+
+.btn-large {
+    font-size: 1.1rem;
+}
+
+.btn-login {
+    height: 6vh;
+    font-size: 1rem;
+    width: 13vw;
+    font-family: 'Avenir-Light';
+    font-weight: bold;
+}
+
+.btn-default {
+    font-size: 1rem;
+}
+
+.btn-small {
+    font-size: 0.9rem;
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+.btn-big {
+    width: 12vw;
+    height: 5vw;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Avenir-Roman';
+    font-size: 1.2rem;
+}
+
+.btn-gray {
+    background-color: @widget-name-tag-color;
+    width: 12vw;
+    height: 5vw;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Avenir-Roman';
+    font-size: 1.2rem;
+
+    &:hover, &.selected, &:focus {
+        background-color: @widget-name-tag-color;        
+    }
+}

@@ -1,0 +1,338 @@
+@font-face {
+  font-family: 'Avenir-Light';
+  src: url('/modules/core/client/css/fonts/avenir-light.eot?#iefix') format('embedded-opentype'), url('/modules/core/client/css/fonts/avenir-light.woff') format('woff'), url('/modules/core/client/css/fonts/avenir-light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Avenir-Book';
+  src: url('/modules/core/client/css/fonts/AvenirLTStd-Book.otf') format('otf'), url('/modules/core/client/css/fonts/avenir-book.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Avenir-Roman';
+  src: url('/modules/core/client/css/fonts/avenir-roman.eot?#iefix') format('embedded-opentype'), url('/modules/core/client/css/fonts/avenir-roman.woff') format('woff'), url('/modules/core/client/css/fonts/avenir-roman.ttf') format('truetype');
+}
+html {
+  font-size: 14px;
+}
+body {
+  font-family: 'Avenir-Book';
+  background-color: #FFFFFF;
+}
+h1 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1rem;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.btn-primary {
+  color: #FFFFFF;
+  background-image: none;
+  background-color: #32AEDE;
+  border-color: transparent;
+  font-size: 1rem;
+  border-radius: 2px;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #2A92BA;
+  border-color: transparent;
+}
+.btn-large {
+  font-size: 1.1rem;
+}
+.btn-login {
+  height: 6vh;
+  font-size: 1rem;
+  width: 13vw;
+  font-family: 'Avenir-Light';
+  font-weight: bold;
+}
+.btn-default {
+  font-size: 1rem;
+}
+.btn-small {
+  font-size: 0.9rem;
+}
+.btn-full-width {
+  width: 100%;
+}
+.btn-big {
+  width: 12vw;
+  height: 5vw;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Avenir-Roman';
+  font-size: 1.2rem;
+}
+.btn-gray {
+  background-color: #606B7F;
+  width: 12vw;
+  height: 5vw;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Avenir-Roman';
+  font-size: 1.2rem;
+}
+.btn-gray:hover,
+.btn-gray.selected,
+.btn-gray:focus {
+  background-color: #606B7F;
+}
+.campaigns-container {
+  margin-top: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.campaigns-container .fa-plus-circle {
+  color: #32AEDE;
+  margin-right: 5px;
+}
+.campaigns-container a {
+  color: #78909C;
+  cursor: pointer;
+}
+.campaigns-container .table-container {
+  margin-top: 20px;
+}
+.campaigns-container .table-container table {
+  font-size: 1rem;
+}
+.campaigns-container .table-container table th {
+  color: #78909C;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-family: 'Avenir-Roman';
+}
+.campaigns-container .table-container table a {
+  color: #32AEDE;
+}
+.campaigns-container .widget-header {
+  color: #78909C;
+  text-align: center;
+}
+.campaigns-container .no-campaigns-message {
+  color: #78909C;
+  text-align: center;
+  font-size: 1.1rem;
+  font-family: 'Avenir-Roman';
+}
+.campaigns-container .preview {
+  margin-top: 10px;
+  border: 1px solid #c6c6c6;
+  border-radius: 3px;
+  padding: 1rem;
+  margin-bottom: 5px;
+}
+.campaigns-container .preview label {
+  color: #78909C;
+  font-family: 'Avenir-Book';
+  font-weight: normal;
+  font-size: 1.1rem;
+}
+.campaigns-container .preview .preview-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10px;
+}
+.campaigns-container .preview .preview-content img {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.campaigns-container .preview .preview-content span {
+  margin-left: 1rem;
+  color: #78909C;
+  font-size: 1.1rem;
+  font-family: 'Avenir-Roman';
+}
+.campaigns-container .document-type-container {
+  background-color: #FFFFFF;
+  position: absolute;
+  right: 10px;
+  width: 30vw;
+}
+.campaigns-container .document-type-container .fa-close {
+  cursor: pointer;
+  color: #78909C;
+}
+.campaigns-container .document-type-container .up-arrow {
+  width: 10px;
+  height: 10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #EFF0F2;
+  margin-left: 19rem;
+  background-color: transparent;
+}
+.campaigns-container .document-type-container .document-type-icons-container {
+  margin-bottom: 5px;
+  border: 1px solid #c6c6c6;
+  padding: 1rem;
+  border-radius: 2px;
+}
+.campaigns-container .document-type-container .document-type-icons-container label {
+  color: #78909C;
+  font-family: 'Avenir-Roman';
+  font-weight: normal;
+  font-size: 1.1rem;
+}
+.campaigns-container .document-type-container .document-type-icons-container .document-type-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+}
+.campaigns-container .document-type-container .document-type-icons-container .document-type-icons img {
+  width: 5.5rem;
+  height: 4.5rem;
+  border: 1px solid #c6c6c6;
+  background-color: #EFF0F2;
+  border-radius: 3px;
+  margin-left: 15px;
+}
+.campaigns-container .document-type-container .document-type-icons-container .document-type-icons .selected {
+  border: 1px solid #000000;
+}
+.campaigns-container .document-type-container .document-type-icons-container .document-type-icons .not-selected {
+  border: 1px solid #c6c6c6;
+}
+.campaigns-container .document-type-container .document-type-details {
+  background-color: #EFF0F2;
+  width: 98%;
+  margin-left: 10px;
+  border-radius: 3px;
+  padding: 1rem;
+  overflow-y: scroll;
+  font-size: 12px;
+  max-height: 30vh;
+  text-align: justify;
+  overflow-x: hidden;
+  word-wrap: break-word;
+}
+.campaigns-container .document-type-container .document-type-details .btn-default {
+  font-size: 10px;
+}
+.campaigns-container .document-type-container .document-type-details .document-instructions {
+  padding: 5px;
+}
+.campaigns-container .document-type-container .document-type-details .document-instructions ol {
+  padding: 10px;
+}
+.campaigns-container .document-type-container .document-type-details .signature-preview textarea {
+  height: 30vh;
+}
+.campaigns-container .document-type-container .document-type-details .signature-preview .branding {
+  font-size: 8px;
+  position: relative;
+  top: 10px;
+}
+.campaigns-container .document-type-container .document-type-details textarea {
+  margin-top: 15px;
+  width: 100%;
+  outline: none;
+  resize: none;
+}
+.campaigns-container .document-type-container .document-type-details .copy-button {
+  position: relative;
+  top: 35px;
+  z-index: 9999;
+  background: #FFFFFF;
+  color: #78909C;
+  border: 1px solid #78909C;
+  font-size: 12px;
+  border-radius: 1px;
+  left: 245px;
+}
+.campaigns-container .document-type-container .document-type-details pre {
+  border-left: none !important;
+  box-shadow: none !important;
+}
+.campaigns-container .document-type-container .arrow-up {
+  width: 10px;
+  height: 10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #EFF0F2;
+  margin-left: 3rem;
+}
+.campaigns-container .document-type-container .arrow-center {
+  width: 10px;
+  height: 10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #EFF0F2;
+  margin-left: 10rem;
+}
+.campaigns-container .document-type-container .arrow-right {
+  width: 10px;
+  height: 10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #EFF0F2;
+  margin-left: 16rem;
+}
+.campaigns-container .customize-widget a {
+  color: #32AEDE;
+  font-size: 11px;
+}
+#customize-widget-modal .form-group {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+#customize-widget-modal .form-group > label {
+  color: #78909C;
+  font-family: 'Avenir-Roman';
+  font-weight: normal;
+  font-size: 1.1rem;
+}
+#customize-widget-modal .form-group img {
+  max-width: 5rem;
+}
+#customize-widget-modal .preview {
+  border: 1px solid #c6c6c6;
+  border-radius: 3px;
+  padding: 1rem;
+}
+#customize-widget-modal .preview .preview-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#customize-widget-modal .preview .preview-content img {
+  width: 3rem;
+  height: 3rem;
+}
+#customize-widget-modal .preview .preview-content span {
+  margin-left: 1rem;
+  color: #78909C;
+  font-size: 1.1rem;
+  font-family: 'Avenir-Roman';
+}
+#customize-widget-modal .fa-close {
+  color: #78909C;
+}
+.show-error {
+  display: block;
+  color: #a94442;
+  font-size: 12px;
+  margin-top: 5px;
+}

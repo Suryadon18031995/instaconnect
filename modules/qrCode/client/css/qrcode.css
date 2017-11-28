@@ -1,0 +1,101 @@
+.qrcode {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.qrcode .main-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.qrcode .main-container .qr-input-box {
+  background: #ffffff;
+}
+.qrcode .main-container .enter-qr-text {
+  font-weight: bold;
+  color: #757575;
+  font-size: initial;
+}
+.qrcode .main-container .scan-qr-text {
+  margin-top: 5vh;
+  font-weight: bold;
+  color: #32AEDE;
+  font-size: initial;
+  text-decoration: underline;
+}
+.qrcode .main-container .enter-btn {
+  background-color: #ffffff;
+  border: 1px solid #32AEDE;
+  color: #32AEDE;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 5vh;
+  cursor: pointer;
+  border-radius: 0px !important;
+  height: 3rem;
+  width: 11rem;
+}
+.qrcode .main-container .cancel-btn {
+  background-color: #ffffff;
+  border: 1px solid #32AEDE;
+  color: #32AEDE;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  cursor: pointer;
+  border-radius: 0px !important;
+  height: 3rem;
+  width: 11rem;
+}
+.request-list {
+  height: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 5vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.request-list .request-list-loop > label {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #757575;
+}
+.request-list .request-list-loop > p {
+  text-align: left;
+  color: #757575;
+  font-weight: bold;
+}
+.request-list .full-height {
+  height: 100%;
+}
+.request-list .request-img {
+  height: 5vh;
+  width: auto;
+}
+.server-container {
+  text-align: center;
+}
+.server-container .heading-text {
+  font-weight: bold;
+  color: #757575;
+  font-size: initial;
+}

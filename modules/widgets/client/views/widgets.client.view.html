@@ -1,0 +1,173 @@
+
+<section class="widgets full-height-section"  data-ng-init="widgetsController.widgetsInitFunction()">
+    <div class="row widget-header vertical-centered">
+        <div class="col-md-5 col-sm-5 col-xs-5 widget-title">
+            <div class="title">Rooms</div>
+        </div>    
+        <div class="col-md-7 col-sm-7 col-xs-7 vertical-centered">
+            <div class="row right-align">
+            <a  class="undecorated-link span-center mg-right-2rem" >
+            <script src="http://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
+                    <script src="http://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.12/xlsx.core.min.js"></script>
+             <button type="button" data-ng-disabled="widgetsController.widgets.length <= 0" data-ng-click="widgetsController.exportData(widgetsController.widgets)"><span class="glyphicon glyphicon-share"></span>Export</button>
+             </a>
+           <span class="separator widget-separator span-center hidden-xs">|</span> 
+                <a data-ui-sref="widgets.printData" class="undecorated-link span-center mg-right-2rem" >
+                    <i class="icon-eye gray-color vetical-align hidden-xs" data-tooltip-placement="bottom" data-uib-tooltip="Widget Export"></i>
+                    <span class="design-widget vetical-align hidden-xs">Print</span>
+                 </a> 
+                 <span class="separator widget-separator span-center hidden-xs">|</span>  
+                <a data-ui-sref="widgets.edit" class="undecorated-link span-center">
+                    <i class="icon-plus blue-color vetical-align" data-tooltip-placement="bottom" data-uib-tooltip="Add New Widget"></i>
+                    <span class="add-new-widget vetical-align">Add New</span>
+                </a>
+                <span class="separator widget-separator span-center hidden-xs">|</span>
+                <a data-ui-sref="widgets.preview" class="undecorated-link span-center mg-right-2rem">
+                    <i class="icon-eye gray-color vetical-align hidden-xs" data-tooltip-placement="bottom" data-uib-tooltip="Widget Preview"></i>
+                    <span class="design-widget vetical-align hidden-xs">Design</span>
+                </a>
+            </div>
+            <div class="row">
+                <select class="form-control selectpicker show-tick" data-ng-model="widgetsController.assignFilter" data-ng-change="widgetsController.setFilter(widgetsController.assignFilter)">
+                    <option value="All" selected>All</option>
+                    <option value="Assigned">Assigned</option>
+                    <option value="Unassigned">Unassigned</option>
+                </select>
+            </div>
+        </div>        
+    </div>
+
+    <div class="full-height horizontal-centered" data-ng-if="widgetsController.widgets.length == 0">
+        <div class="empty-block">There are no rooms here
+            <div class="horizontal-centered">
+                  <a data-ui-sref="widgets.edit" class="undecorated-link span-center">
+                    <span class="add-new-widget vetical-align">Create a new one</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row widget-bottom" data-ng-if="widgetsController.widgets.length > 0">
+        <div class="col-md-12 col-xs-12 col-sm-12 table-container">
+                <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <!--<th class="table-heading"></th>-->
+                                <th class="table-heading col-xs-3">Rooms</th>
+                                <th class="table-heading hidden-xs">Description</th>
+                                <th class="table-heading col-xs-3">Unique Code</th>
+                                <th class="table-heading col-xs-3">Assigned To</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="widget in widgetsController.widgets | orderBy:widgetsController.orderWidget('widgetName')">
+                                 <td class="column-border col-md-5 col-sm-3 col-xs-3">
+                                   <!--<img ng-src="{{widget.imageUrl}}" class="col-md-2 widgetImg">-->
+                                    <p class="text-ellipsis no-padding no-margin widgetName">{{widget.widgetName}}</p>
+                                </td> 
+                                <td class="column-border center-vertical col-sm-2 col-xs-2 hidden-xs" data-ng-if="widget.widgetText">{{widget.widgetText}}</td>
+                                <td class="column-border center-vertical col-sm-2 col-xs-2" data-ng-if="!widget.widgetText">
+                                     - </td>
+                               <td class="column-border center-vertical col-sm-3 col-xs-3">{{widget.conversationCode}}</td>
+                                <td class="column-border center-vertical col-sm-2 col-xs-3" data-ng-if="!widget.assignedTo">Unassigned</td>
+                                <td class="column-border center-vertical col-sm-2 col-xs-3" data-ng-if="widget.assignedTo">{{widget.assignedTo.displayName}}</td>
+                                <td class="column-border center-vertical col-xs-1"> 
+                                    <a data-ui-sref="widgets.edit({ widgetId: widget._id })" data-ng-click="widgetsController.setInstructions(false)">
+                                        <i class="icon-pencil gray-color" data-tooltip-placement="bottom" data-uib-tooltip="Edit Widget" ></i>
+                                    </a>
+                                </td>
+                                <td class="column-border center-vertical col-xs-1 hidden-xs"> 
+                                    <a data-ui-sref="widgets.Print({ widgetId: widget._id })" data-ng-click="widgetsController.setInstructions(false)">
+                                        <i class="icon-printer gray-color" data-tooltip-placement="bottom" data-uib-tooltip="Print Widget" ></i>
+                                    </a>
+                                </td>
+                                <td class="column-border center-vertical col-xs-1">
+                                    <a href='#' data-toggle="modal" data-target="#delete-widget-info-modal" data-ng-click="widgetsController.selectWidget(widget._id)">
+                                        <i class="icon-trash gray-color" data-tooltip-placement="bottom" data-uib-tooltip="Delete Widget"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="delete-widget-info-modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Delete Rooms</h3>
+                </div>
+                <div class="modal-body">
+                    Are you sure, you want to delete Rooms?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="widgetsController.deleteWidget()">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!--<section class="widgets">
+    <div class="row page-title">
+        <span class="title">Widgets</span>
+        <span class="separator">|</span>
+        <span class="uppercase text-muted sub-title">Build &amp; Customize Your Widget</span>
+    </div>
+    <div class="row widgets-container">
+        <div class="row">
+            <a ui-sref="widgets.edit">
+                <div class="col-md-3 push-md-9 col-lg-2 push-lg-10 col-xs-11 push-xs-1 new-widget-card">
+                    <div class="create-widget-image">
+                        <img ng-src="/modules/widgets/client/img/sign.png" class="img-responsive">
+                    </div>
+                    <div class="create-widget-text"> + Create New Widget</div>
+                </div>
+            </a>
+            <div class="col-md-3 col-lg-2 col-xs-11 widget-card" id="{{widget._id}}" ng-repeat="widget in widgetsController.widgets">
+                <div class="widget-details">
+                    <div class="img-container"><img ng-src="{{widget.imageUrl}}" class="img-responsive"></div>
+                    <div ng-style="{'color': widget.color}" class="widget-text truncate-text"> {{widget.widgetText}} </div>
+                </div>
+                <div class="widget-name-text">
+                    <div class="truncate-text"> {{widget.widgetName}} </div>
+                </div>
+                <div class="widget-created" am-time-ago="widget.created"></div>
+                <div class="widget-conversation-code"> {{widget.conversationCode}} </div>
+                <div class="widget-options-new">
+                    <a ui-sref="widgets.edit({ widgetId: widget._id })" ng-click="widgetsController.setInstructions(false)">
+                        <i class="icon-pencil" tooltip-placement="bottom" uib-tooltip="Edit Widget" ></i>
+                    </a>
+                    <a href='#' data-toggle="modal" data-target="#delete-widget-info-modal" ng-click="widgetsController.selectWidget(widget._id)">
+                        <i class="icon-trash" tooltip-placement="bottom" uib-tooltip="Delete Widget"></i>
+                    </a>
+                    <a ui-sref="widgets.edit({ widgetId: widget._id })" ng-click="widgetsController.setInstructions(true)">
+                        <i class="icon-notebook" tooltip-placement="bottom" uib-tooltip="Show Instructions"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="delete-widget-info-modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Widget</h3>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure, you want to delete widget?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="widgetsController.deleteWidget()">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>-->

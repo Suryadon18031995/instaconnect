@@ -1,0 +1,241 @@
+@import './modules/core/client/less/variables.less';
+@import './modules/core/client/less/buttons.less';
+@font-face {
+    font-family: 'Avenir-Light';
+    src: url('/modules/core/client/css/fonts/avenir-light.eot?#iefix') format('embedded-opentype'), url('/modules/core/client/css/fonts/avenir-light.woff') format('woff'), url('/modules/core/client/css/fonts/avenir-light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Avenir-Book';
+    src: url('/modules/core/client/css/fonts/AvenirLTStd-Book.otf') format('otf'), url('/modules/core/client/css/fonts/avenir-book.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Avenir-Roman';
+    src: url('/modules/core/client/css/fonts/avenir-roman.eot?#iefix') format('embedded-opentype'), url('/modules/core/client/css/fonts/avenir-roman.woff') format('woff'), url('/modules/core/client/css/fonts/avenir-roman.ttf') format('truetype');
+}
+
+.requests {
+    padding-bottom: 1rem;
+
+    .requests_header {
+        margin-top: 4rem;
+        margin-bottom: 2rem; 
+        display: flex;
+        justify-content: left;
+    }
+    .requests_title {
+        text-align: left;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #757575;
+    }
+    .add_requests_button {
+        color: #32AEDE;
+        text-align: right;
+        > label {
+            color: #337ab7;
+            text-decoration: underline;
+        }
+    }
+
+    .request-list-container {
+        padding-top: 1rem; 
+    }
+    .requests_container {
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        
+        .request-content {
+            border-bottom: 1px solid #d6d6d6;
+            padding: 0;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            margin-right: 0px;
+            margin-left: 0px;
+            width: 100%; 
+
+            .request_list_options {
+                width: 100%;
+              }
+
+            .requests-check-icon {
+                display: flex;
+                justify-content: left;
+                color: #33ceaa;
+            }
+        }
+        .requests_list {
+            justify-content: left;
+            > label {
+                font-weight: bold;
+                font-size: 1.5rem;
+                color: #757575;
+            }
+            > p {
+                text-align: left;
+                color: #757575;
+                font-weight: bold;
+            }
+        }
+        .full-width {
+            width: 100%;
+            border-bottom: 1px solid #757575;
+        }
+        .full-height {
+            height: 100%;
+        }
+    }
+
+    .requests_container :hover {
+        background-color: #d6d6d6;  
+    }
+
+    .request_logo {
+        height: 5vh;
+        width: auto;
+    }
+};
+
+.request-modal {
+    .heading {
+        width: 100%;
+        text-align: center;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #757575;
+    }
+    .form_main {
+        height: 70vh;
+        background-color: #ffffff;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        border: 1px solid #ffffff;
+    }
+    .label_center {
+        width: 100% !important;
+        text-align: center !important;
+        color: #757575;
+        height: 5vh;
+    }
+    .logo {
+        width: auto;
+        height: 10vh;
+        margin-bottom: 2rem;
+    }
+    .logo-blank {
+        width: 12vh;
+        height: 11vh;
+        border: 1px solid grey;
+        margin-bottom: 2rem;
+    }
+    .request-title-input-box {
+        border-radius: 0px !important;
+        height: 3rem;
+    }
+    .request-message-input-box {
+        border-radius: 0px !important;
+        height: 5rem;
+    }
+    .upload-box {
+        height: 13vh;
+    }
+    .request-buttons {
+        height: 35%;
+        display: flex;
+        .title-box {
+            height: 15vh;
+        }
+        .message-box {
+            height: 15vh;
+        }
+        .glyphicon.spinner {
+            animation: spin 1s infinite linear;
+            -webkit-animation: spin2 1s infinite linear;
+        }
+        @keyframes spin {
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+            to {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+        @-webkit-keyframes spin2 {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        .button-center {
+            display: flex;
+            justify-content: center;
+        }
+        .add-button {
+            width: 12rem;
+            height: 3rem;
+            font-weight: bold;
+            border-radius: 0;
+        }
+        .cancel-btn {
+            background: transparent !important;
+            color: red;
+            border: 0 !important;
+            box-shadow: none !important;
+            text-decoration: underline;
+        }
+        .cancel-btn:hover {
+            background: transparent !important;
+            color: red;
+            border: 0;
+            box-shadow: none;
+        }
+    }
+    .requestFormValidationError {
+        color: red;
+    }
+}
+
+// Responsive css
+
+@media only screen and (max-width: 500px) {
+   
+    .table-heading {
+        font-size: 1rem !important; 
+    }
+    
+    .requests{
+        .requests_container{
+            .request-content{
+                .request_list_options {
+                    width: auto;
+                }
+            }
+        }
+    }   
+};
+@media only screen and(min-width: 768px) {
+
+    .requests_header {
+        height: 15vh ;
+        display: flex;
+        align-items: center;
+    }
+};

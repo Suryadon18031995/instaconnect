@@ -1,0 +1,55 @@
+<section id="contacts">
+  <div class="row page-title" ng-show="contactsController.contacts !== null">
+    <span class="title">Contacts</span>
+    <span class="separator">|</span>
+    <span class="uppercase text-muted sub-title">Manage Your Contacts</span>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12 loading-div" ng-show="contactsController.isLoading">
+      <span us-spinner spinner-theme="graySpinner"></span>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xs-12" ng-show="!contactsController.isLoading && contactsController.contacts === null">
+      <div class="no-contacts-message">
+        <img ng-src="/modules/contacts/client/img/no-contacts.svg" class="img-responsive">
+        <div class='text-center'>
+          <h3> No Contacts Found </h3>
+          <h4 class='message'>Create & Share a widget to connect with more people</h4>
+          <button class='btn btn-primary' ui-sref="widgets.list"> My Widgets </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-xs-12 contacts-list" ng-show='contactsController.contacts !== null'>
+      <div class="contact-row" ng-repeat='contact in contactsController.contacts' ng-click="contactsController.showContactDetails(contact)"
+        ng-class="contactsController.selectedContact._id === contact._id ? 'selected' : ''">
+        <div class="contact-name">{{contact.name}}</div>
+        <div class="contact-created" am-time-ago="contact.created"></div>
+      </div>
+      <div ng-show="contactsController.isLoading">
+        <span us-spinner spinner-theme="graySpinner"></span>
+      </div>
+    </div>
+    <div class="col-md-8 col-lg-8 col-xs-12 contact-details" ng-show='contactsController.contacts !== null'>
+      <div ng-show="contactsController.isLoading">
+        <span us-spinner spinner-theme="graySpinner"></span>
+      </div>
+      <div ng-show="contactsController.selectedContact">
+        <div class="contact-data">
+          <div class="title">Name</div>
+          <div>{{contactsController.selectedContact.name}}</div>
+        </div>
+        <div class="contact-data">
+          <div class="title">Channel</div>
+          <div>{{contactsController.selectedContact.channel}}</div>
+        </div>
+        <div class="contact-data">
+          <div class="title">Address</div>
+          <div>{{contactsController.selectedContact.address}}</div>
+        </div>
+        <div class="contact-data">
+          <div class="title">IP Address</div>
+          <div>{{contactsController.selectedContact.ipAddress}}</div>
+        </div>
+      </div>
+
+    </div>
+</section>

@@ -1,0 +1,197 @@
+<div data-ng-init="frequentRequestController.getFireBaseStorageReference()" class="horizontal-centered">
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="row no-margin requests">
+            <div class="col-md-12 col-sm-12 col-xs-12 requests_header">
+                <div class="col-md-7 col-sm-7 col-sx-7 requests_title no-padding">
+                    Requests
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5 add_requests_button no-padding">
+                    <label data-ng-click="frequentRequestController.editModeRequest = false;frequentRequestController.request = '';frequentRequestController.submitted = false " data-toggle="modal" data-target="#myModal">
+                        <a href="#">Add New</a>
+                    </label>
+                </div>
+            </div>
+            
+            <ul data-dnd-list="frequentRequestController.requestList" data-dnd-drop="callback({targetList: frequentRequestController.requestList, targetIndex: index})">
+            <li class="row" data-dnd-draggable="null" data-dnd-callback="onDrop(frequentRequestController.requestList, $index, targetList, targetIndex)" data-ng-if="frequentRequestController.requestList" data-ng-repeat="request in frequentRequestController.requestList | orderBy: 'positionId'">
+                <div class="col-md-12 col-sm-12 col-xs-12 requests_container">
+                    <div class="row request-content">
+                        <div class="col-md-2 col-sm-2 col-xs-2 full-height vertical-centered" data-ng-click="frequentRequestController.setFrequentRequest(request)">
+                            <img class="img-responsive request_logo" src="{{request.imageUrl}}" data-ng-if="request.imageUrl">
+                            <img class="img-responsive request_logo" src="/modules/frequentRequest/client/img/default_frequent_request.png" data-ng-if="!request.imageUrl">
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-7 requests_list" data-ng-click="frequentRequestController.setFrequentRequest(request)">
+                            <label class="truncate-text">
+                                {{request.title}}
+                            </label>
+                            <p class="truncate-text">
+                                {{request.message}}
+                            </p>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 full-height vertical-centered">
+                            <!-- <div class="row request_list_options" data-ng-if="request.isDefault" data-ng-click="frequentRequestController.setFrequentRequest(request)">
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <i class="icon-pencil gray-color" tooltip-placement="bottom" uib-tooltip="Edit Frequent Request" ng-hide="request.isDefault" ></i>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <i class="icon-trash gray-color" tooltip-placement="bottom" uib-tooltip="Delete Frequent Request" ng-hide="request.isDefault" ></i>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">                                
+                                    <i class="fa fa-check green-color" aria-hidden=â€œtrueâ€� ng-show="request.isSelected"></i>
+                                    <i class="fa fa-check light-gray-color" aria-hidden=â€œtrueâ€� ng-show="!request.isSelected"></i>
+                                </div>
+                            </div> -->
+                            <div class="row request_list_options">
+                                <div class="col-md-4 col-sm-4 col-xs-4" data-toggle="modal" data-target="#myModal" data-ng-click="frequentRequestController.setDataForEdit(request)">
+                                    <i class="icon-pencil gray-color" data-tooltip-placement="bottom" data-uib-tooltip="Edit" ></i>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4" data-toggle="modal" data-target="#delete-frequent-request-info-modal" data-ng-click="frequentRequestController.selectedFrequentRequest(request._id)">
+                                    <i class="icon-trash gray-color" data-tooltip-placement="bottom" data-uib-tooltip="Delete"></i>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4" data-ng-click="frequentRequestController.setFrequentRequest(request)">
+                                    <i class="fa fa-check green-color" aria-hidden=â€œtrueâ€� data-ng-show="request.isSelected"></i>
+                                    <i class="fa fa-check light-gray-color" aria-hidden=â€œtrueâ€� data-ng-show="!request.isSelected"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Frequent Request Modal -->
+<div class="modal fade" id="delete-frequent-request-info-modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete  Request</h3>
+            </div>
+            <div class="modal-body">
+                Are you sure, you want to delete this  request?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="frequentRequestController.deleteFrequentRequest()">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add/Edit Frequent Request Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="row modal-body">
+                <div class="request-modal col-md-8">
+                    <div class="heading" data-ng-if="!frequentRequestController.editModeRequest">
+                        New Request
+                    </div>
+                    <div class="heading" data-ng-if="frequentRequestController.editModeRequest">
+                        Update Request
+                    </div>
+                    <form class="form_main" data-ng-submit="frequentRequestController.submitted = true;frequentRequestController.addRequest(requestForm.$valid, $event)" name="requestForm" novalidate>
+                        <label class="label_center">
+                            Upload Image
+                        </label>
+                        <div data-ng-if="!frequentRequestController.request.imageUrl" class="col-md-4 logo-blank vertical-centered" data-ng-model="frequentRequestController.requestImage" data-ngf-select="frequentRequestController.uploadRequestImage()" data-accept="image/*">
+                            <img data-ng-if="!frequentRequestController.request.imageUrl" class="full-height img-responsive" src="/modules/organizations/client/img/image_upload_placeholder.png" data-accept="image/*">
+                        </div>
+                        <img data-ng-if="frequentRequestController.request.imageUrl" class="logo img-responsive" src="{{frequentRequestController.request.imageUrl}}" data-ng-model="frequentRequestController.requestImage" data-ngf-select="frequentRequestController.uploadRequestImage()">
+                        <div class="form-group title-box">
+                            <label for="title" class="label_center">Request Title</label>
+                            <input type="text" size="40rem" class="form-control request-title-input-box" data-ng-model="frequentRequestController.request.title" placeholder="Request title" name="title" required>
+                            <span class="requestFormValidationError" data-ng-if="frequentRequestController.submitted && requestForm.title.$invalid">Enter request title</span>
+                        </div>
+                        <div class="form-group message-box">
+                            <label for="message" class="label_center">Request Message</label>
+                            <input type="text" size="40rem" class="form-control request-message-input-box" data-ng-model="frequentRequestController.request.message" placeholder="Request message" name="message" required>
+                            <span class="requestFormValidationError" data-ng-if="frequentRequestController.submitted && requestForm.message.$invalid">Enter request message</span>
+                        </div>
+                        <div class="form-group">
+                            <div class="row request-buttons">
+                            	<div class="col-md-4 button-center">
+                            	<!-- <a data-ng-click="addStaff = !addStaff">
+                            		<span class="btn btn-primary" data-ng-click="frequentRequestController.getStaff()" data-ng-hide="addStaff">
+                                    	Add Staff
+                                	</span>
+                                	<span data-ng-show="addStaff" class="btn btn-primary">
+                                    	Cancel Staff
+                                	</span>
+                                </a> -->
+                                </div>
+                                <div class="col-md-4 button-center">
+                                    <button class="add-button btn btn-primary" data-dismiss="">
+                                        <span data-ng-if="!frequentRequestController.editModeRequest">ADD</span>
+                                        <span data-ng-if="frequentRequestController.editModeRequest">Update</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="col-md-4 button-center">
+                                    <button class="cancel-btn btn btn-primary" data-ui-sref="frequentRequests.list" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="request-modal col-md-4">
+                         <div class="heading" data-ng-if="!frequentRequestController.editModeRequest">
+                        Assign Staff
+                    </div>
+                     <div class="form-group">
+                            <div class="row request-buttons">
+                            	<div class="col-md-12 button-center">
+                            	<a data-ng-click="addStaff = !addStaff">
+                            		<span class="btn btn-primary" data-ng-click="frequentRequestController.getStaff()" data-ng-hide="addStaff">
+                                    	Add Staff
+                                	</span>
+                                	<span data-ng-show="addStaff" class="btn btn-primary">
+                                    	Cancel Staff
+                                	</span>
+                                </a>
+                                </div>
+                        <div class="form-group message-box" data-ng-show="addStaff">
+                        	<label for="title" class="label_center"><!-- Assign Staff --></label>
+                        	<!-- <selectize data-ng-model="frequentRequestController.request.staffList" config="myConfig" options="frequentRequestController.waiters" class="form-control request-title-input-box" placeholder="Add Staff" name="staff"></selectize> -->
+                        	<select data-ng-model="frequentRequestController.request.staffList[0]" style="margin-left:-194px;">
+							  <option value="">Please Select</option>
+							  <option data-ng-repeat="w in frequentRequestController.waiters" value="{{w._id}}">{{w.displayName}}</option>
+							 </select>
+                        </div>
+                        <!-- <div class="form-group title-box">
+                            <label for="title" class="label_center">Position</label>
+                            <input type="text" size="40rem" class="form-control request-title-input-box" data-ng-model="frequentRequestController.request.positionId" placeholder="Request title" name="position" required>
+                            <span class="requestFormValidationError" data-ng-if="frequentRequestController.submitted && requestForm.position.$invalid">Enter position</span>
+                        </div> -->
+                       <!--  <div class="form-group">
+                            <div class="row request-buttons">
+                            	<div class="col-md-4 button-center">
+                            	<a data-ng-click="addStaff = !addStaff">
+                            		<span class="btn btn-primary" data-ng-click="frequentRequestController.getStaff()" data-ng-hide="addStaff">
+                                    	Add Staff
+                                	</span>
+                                	<span data-ng-show="addStaff" class="btn btn-primary">
+                                    	Cancel Staff
+                                	</span>
+                                </a>
+                                </div>
+                                <div class="col-md-4 button-center">
+                                    <button class="add-button btn btn-primary" data-dismiss="">
+                                        <span data-ng-if="!frequentRequestController.editModeRequest">ADD</span>
+                                        <span data-ng-if="frequentRequestController.editModeRequest">Update</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="col-md-4 button-center">
+                                    <button class="cancel-btn btn btn-primary" data-ui-sref="frequentRequests.list" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

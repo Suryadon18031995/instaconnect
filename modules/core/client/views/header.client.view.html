@@ -1,0 +1,64 @@
+<div class="container" data-ng-controller="HeaderController as vm">
+  <div class="navbar-header">
+    <button  class="navbar-toggle" data-ng-class="{'hidden-xs':$root.hideNavBar}" type="button" data-target="#navbar"  data-ng-click="vm.isCollapsed = !vm.isCollapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="https://instaconnect.surge.sh/" class="navbar-brand"><img src="/modules/core/client/img/brand/logo.png" class="img-responsive"></a>
+  </div>
+  <nav id="navbar" class="navbar-collapse" data-uib-collapse="!vm.isCollapsed" role="navigation">
+    <ul data-ng-show="!$root.hidenavbar"class="nav navbar-nav" data-ng-if="vm.menu.shouldRender(vm.authentication.user);">
+      <li data-ui-sref-active="active" data-ng-repeat="item in vm.accountMenu.items" data-ng-show="vm.authentication.user">
+          <a data-ui-sref="{{item.state}}" data-ng-bind="item.title"></a>
+      </li>
+      <li data-ng-repeat="item in vm.menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(vm.authentication.user);" data-ng-switch="item.type" data-ng-class="{ dropdown: item.type === 'dropdown' }" ui-sref-active="active" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'" id="{{item.title | lowercase}}">
+        <a data-ng-switch-when="dropdown" class="dropdown-toggle" data-uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
+        <ul data-ng-switch-when="dropdown" class="dropdown-menu">
+          <li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(vm.authentication.user);">
+            <a data-ui-sref="{{subitem.state}}({{subitem.params}})" data-ng-bind="subitem.title"></a>
+          </li>
+        </ul>
+        <a ng-switch-default ui-sref="{{item.state}}">{{item.title}} <i class="glyphicon glyphicon-certificate notification-icon" ng-show="item.title === 'CHATS' && $root.showNotification"></i> </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" ng-hide="vm.authentication.user" id="sign-in-header">
+      <li>
+        <a ui-sref="authentication.signin">Login</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user" id='drop-down-menu'>
+      <li class="dropdown" uib-dropdown>
+        <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
+          <!--<img ng-src="/{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.firstName}}" class="header-profile-image" />-->
+          Welcome <span ng-bind="vm.authentication.user.firstName"></span> <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-if="!$root.hidenavbar">
+            <a ui-sref="settings.profile">
+              <i class='icon-user'></i>&nbsp;
+              <span>Profile</span>
+            </a>
+          </li>
+          <li ng-if="!$root.hidenavbar">
+            <a ng-click="vm.goto_establishment()">
+              <i class='icon-user'></i>&nbsp;
+              <span>Establishment</span>
+            </a>
+          </li>
+          <!--<li ui-sref-active="active">
+            <a ui-sref="settings.password">Change Password</a>
+          </li>-->
+          <li class="divider"></li>
+          <li>
+            <a target="_self" ng-click="vm.signOutUser()">
+              <i class='icon-power'></i>&nbsp;
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

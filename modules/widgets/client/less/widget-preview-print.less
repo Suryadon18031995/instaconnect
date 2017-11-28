@@ -1,0 +1,103 @@
+@import './modules/core/client/less/variables.less';
+@import './modules/core/client/less/buttons.less';
+@media print {
+    .printButton {
+        display:none
+    }
+    .widget-preview {
+        margin-top: 2.5rem;
+        height: 80vh;
+        width: 45vw;
+        border: 1px dashed @nav-border-color;
+    }
+    .widget-first {
+        height: 20%;
+        margin-bottom:3rem;
+    }
+    .widget-second {
+        height: 65%;
+    }
+    .widget-preview-btn {
+        height: 15%;
+    }
+    .preview-widget-img {
+        width: auto;
+        height: 12vh;
+        margin-right: 2rem;
+    }
+    .preview-widget-text {
+        font-size: 2.5rem;
+        color: #547c90 !important;
+        -webkit-print-color-adjust: exact;
+        font-weight: bold;
+    }
+    .widget-preview-textarea {
+        height: 30%;
+    }
+    .preview-textarea {
+        font-size: 1rem;
+        color: #547c90 !important;
+        -webkit-print-color-adjust: exact;
+    }
+    .widget-preview-unique-code {
+        height: 20%;
+    }
+    .unique-code {
+        font-size: 1.2rem;
+        color: #547c90 !important;
+        -webkit-print-color-adjust: exact;
+        font-weight: bold !important;
+    }
+    .unique-code-number {
+        border: transparent;
+        color: #547c90 !important;
+        -webkit-print-color-adjust: exact;
+        font-size: 1.5rem;
+        letter-spacing: 0.7rem;
+        height: 3rem;
+    }
+    .widget-quick-access {
+        height: 32%;
+    }
+    .quick-access-text {
+        font-size: 1.2rem;
+        color: #547c90 !important;
+        -webkit-print-color-adjust: exact;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    .quick-access-image {
+        width: 10vw;
+        height: auto;
+    }
+    .quick-access-menu-text {
+        font-size: 1rem;
+        color: #547c90 !important;
+        -webkit-print-color-adjust: exact;
+        font-weight: bold;
+        margin-top: 0.2rem;
+    }
+    .preview-widget-header {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: left;
+    }
+    .goBack {
+        text-align: right;
+        font-size: 1rem;
+        text-decoration: underline;
+        color: #547c90;
+        justify-content: flex-end
+    }
+    .heading {
+        color: #547c90;
+        margin-top: 1rem;
+        margin-bottom: 4rem;
+    }
+    .justify-content {
+        justify-content: flex-end;
+    }
+    .full-height {
+        height: 100%;
+    }
+}

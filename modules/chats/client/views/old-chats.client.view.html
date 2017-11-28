@@ -1,0 +1,112 @@
+<div class="chats">
+  <div class="main-container" data-ng-hide="!chatsController.showChat">
+    <!--<div class="col-md-6 col-lg-6 col-xs-12 prospects-details-container">
+      <div class="prospects-title">Tell us who you are</div>
+      <div class="prospects-details">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" class="form-control" required ng-model='chatsController.prospects.name' disabled='disable'>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" class="form-control" ng-model='chatsController.prospects.email'>
+        </div>
+        <div class="form-group">
+          <label for="contactNumber">Contact Number</label>
+          <input type="text" id="contactNumber" name="contactNumber" class="form-control" ng-model='chatsController.prospects.contactNumber'>
+        </div>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" class="form-control" ng-model='chatsController.prospects.title'>
+        </div>
+        <div class="form-group">
+          <label for="title">Company</label>
+          <input type="text" id="company" name="company" class="form-control" ng-model='chatsController.prospects.company'>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary btn-login" ng-click="chatsController.updateProspects()">Update</button>
+        </div>
+      </div>
+    </div>-->
+    <div class="row horizontal-centered vertical-centered">
+      <div class="col-md-6 col-lg-6 col-xs-12 chat-container">
+        <div class="chat-title">
+          <div class="profile-image">
+            <img data-ngf-src="chatsController.user.profileImageURL ? chatsController.user.profileImageURL === 'modules/users/client/img/profile/default.png' ? '/modules/core/client/img/brand/logo.png' : chatsController.user.profileImageURL : '/modules/core/client/img/brand/logo.png'"
+              alt="" ngf-drop class="img-responsive" id="profileImage">
+          </div>
+          <div class="user-details">
+            <span class="title" data-ng-class="!chatsController.salesPersonStatus ? 'title-slide-down' : 'title-slide-up' ">{{chatsController.user.displayName}}</span><br/>
+            <span class="sub-title user-status" data-ng-if="chatsController.salesPersonStatus === 'offline'"> Last Active - <span data-am-time-ago="chatsController.lastSeenTime"></span></span>
+            <span class="sub-title user-status" data-ng-if="chatsController.salesPersonStatus === 'online'"> Online </span>
+          </div>
+        </div>
+        <div class="messages-container" data-scroll-bottom="chatsController.messages">
+          <div class="horizontal-centered vertical-centered loading-message" data-ng-show="chatsController.messages === null">
+            Loading ...
+          </div>
+          <div class='message-content' data-ng-repeat="message in chatsController.messages" data-ng-class="message.senderId === undefined ? 'pull-left' : message.senderId === chatsController.Authentication.user._id || message.senderId === chatsController.prospects._id ? 'pull-right own-message' : 'pull-left'">
+            <span class="sender-name">{{ message.senderName }}</span>
+            <span class="pull-right message-time" data-am-time-ago="message.timeStamp"></span><br/>
+            <div class="text-content">{{ message.content }}</div>
+          </div>
+        </div>
+        <div class="message-sender">
+          <input type="text" class="textarea" placeholder="Type here.." data-ng-model='chatsController.newMessage' data-ng-keyup="$event.keyCode == 13 ? chatsController.sendMessage() : null">
+          <button class="btn btn-primary send-button" data-ng-click='chatsController.sendMessage()'></button>
+          <!--<div class="horizontal-centered vertical-centered">
+            
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row signin horizontal-centered vertical-centered" data-ng-hide="chatsController.showChat">
+    <div class="user-details-container">
+      <h3>Tell us who you are</h3>
+      <form name="chatsController.userForm" data-ng-submit="chatsController.createProspects(chatsController.userForm.$valid)" novalidate
+        autocomplete="off">
+        <fieldset>
+          <div class="form-group" show-errors>
+            <uib-alert type="danger" data-ng-show="chatsController.error" class="text-center text-danger">
+              <span data-ng-bind="chatsController.error"></span>
+            </uib-alert>
+            <label for="name">Display Name</label>
+            <input type="text" id="displayName" name="displayName" class="form-control" data-ng-model="chatsController.prospects.name" placeholder=""
+              autofocus>
+            <div data-ng-messages="chatsController.userForm.email.$error" role="alert">
+              <p class="help-block error-text" data-ng-message="required">Display Name is required.</p>
+            </div>
+          </div>
+          <!--<div class="form-group" show-errors>
+            <uib-alert type="danger" ng-show="chatsController.error" class="text-center text-danger">
+              <span ng-bind="chatsController.error"></span>
+            </uib-alert>
+            <label for="name">Email</label>
+            <input type="email" id="email" name="email" class="form-control" ng-model="chatsController.prospects.email" placeholder="">
+            <div ng-messages="chatsController.userForm.email.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Email is required.</p>
+            </div>
+          </div>-->
+          <div class="text-center form-group">
+            <button type="submit" class="btn btn-primary btn-login">Chat with {{chatsController.user.displayName}}</button>
+          </div>
+          <br />
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Join InstaConnect</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+      {{modalInstanceCtrl.user.displayName}} has invited you to join InstaConnect
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="modalInstanceCtrl.ok()">Join</button>
+      <button class="btn btn-danger" type="button" ng-click="modalInstanceCtrl.cancel()">Cancel</button>
+    </div>
+  </script>
+
+</div>

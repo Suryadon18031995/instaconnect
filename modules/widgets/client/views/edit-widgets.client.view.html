@@ -1,0 +1,303 @@
+<section class="widgets full-width full-height-section vertical-centered horizontal-centered">
+    
+    <div class="col-md-5 col-sm-9 col-xs-10 widget_inner box-height-sm">
+                <div class="row col-flex-direction horizontal-centered">
+                        
+                        <div class="col-md-12 widget-heading" data-ng-if="!editMode">
+                                Add New Room
+
+                        </div>
+                        <div class="col-md-12 widget-heading" data-ng-if="editMode">
+                                Edit Rooms
+                        </div>
+                </div>
+                <div class="row vertical-centered padding-1rem" data-ng-show="!editMode">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <ul class="tabmenu no-margin no-padding height-10">
+                                <li data-ng-class="{'active': tabName=='tab1'}" class="col-md-6 col-sm-6 col-xs-6" data-ng-click="tabName='tab1'">Add One</li>
+                                <li data-ng-class="{'active': tabName=='tab2'}" class="col-md-6 col-sm-6 col-xs-6" data-ng-click="tabName='tab2'">Add Multiple</li>
+                          </ul>
+                        </div> 
+                </div>
+                <div class="row height-50" data-ng-switch="tabName">
+                        <div class="col-md-12 contents" data-ng-switch-when="tab1">
+                          <form name="widget_form" data-ng-submit="editWidgetController.saveWidget(widget_form.$valid)" novalidate>
+                            <div class="form-contents">
+                                <div class="form-group first-form">
+                                    <label for="name" class="label_center label_left">Room Name</label>
+                                    <input type="text" size="10rem" class="form-control input_box_widget" id="name" data-ng-model="editWidgetController.widget.widgetName" name="widgetName" required>
+                                    <span class="validationError" data-ng-if="submitted && widget_form.widgetName.$invalid">Enter widget name</span>
+                                    <!-- <div ng-messages="widget_form.widgetName.$error" role="alert">
+                                      <p class="help-block error-text" ng-message="required">Please enter widget name</p>
+                                    </div> -->
+                                </div>
+                                <div class="form-group">
+                                  <label for="address" class="label_center label_left">Description</label>
+                                  <input type="text" size="35rem" class="form-control input_box_widget" id="address" data-ng-model="editWidgetController.widget.widgetText" name="widgetText">
+                                  <!--<span class="validationError" ng-if="submitted && widget_form.widgetText.$invalid">Enter widget description</span>-->
+                                </div>
+                                <div class="form-group">
+                                  <label for="address" class="label_center label_left">Unique code</label>
+                                  <input type="text" data-ng-model="editWidgetController.widget.conversationCode" class="Unicode" data-ng-readonly="true">
+                                  <a data-toggle="tooltip" data-placement="right" title="Refresh"><i class="fa fa-refresh" aria-hidden="true" data-ng-click="editWidgetController.getUniqueCode()"></i></a>
+                                </div>
+                            </div>
+                            <div class="full-width button-contents">
+                                <button class="col-md-6 btn btn-primary" data-ng-disabled="show_loading" data-ng-if="!editMode">
+                                <span data-ng-hide="show_loading">CREATE</span>
+                                    <span data-ng-show="show_loading">
+                                        Creating ...<i class="glyphicon glyphicon-refresh spinning"></i>
+                                    </span>
+
+                                </button>
+                                <button class="col-md-6 btn btn-primary" data-ng-disabled="show_loading" data-ng-if="editMode">
+                                 <span data-ng-hide="show_loading">UPDATE</span>
+                                <span data-ng-show="show_loading">
+                                        Updating ...<i class="glyphicon glyphicon-refresh spinning"></i>
+                                    </span>
+                                </button>
+                                <button class="col-md-4 cancel_btn btn btn-primary" data-ui-sref="widgets.list">CANCEL</button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="col-md-12 contents" data-ng-switch-when="tab2">
+                          <form name="multiple_widget_form" data-ng-submit="save_multiple_widget(multiple_widget,multiple_widget_form.$valid)" novalidate>
+                            <div class="form-contents">
+                                <div class="form-group first-form">
+                                    <label for="name" class="label_center label_left">Room Prefix</label>
+                                    <input type="text" size="40rem" class="form-control input_box_widget" id="name" data-ng-model="multiple_widget.widget_prefix" name="prefix" required>
+                                    <span class="validationError" data-ng-if="submitted_multiple && multiple_widget_form.prefix.$invalid">Enter widget prefix</span>
+                                </div>
+                                <div class="form-group">
+                                 <label for="address" class="label_center label_left">Enter range</label>
+                                  <div class="range">
+                                    <input type="number" placeholder="start"  class="form-control input_box_range col-md-5" id="address" data-ng-model="multiple_widget.startRange" name="start" required><br/>
+                                    
+                                     <div class="col-md-2 vertical-centered">
+                                         <span class="range-separator"></span>
+                                     </div>
+
+                                    <input type="number" placeholder="end" class="form-control input_box_range col-md-5" id="address" data-ng-model="multiple_widget.endRange" name="end" required><br/>
+                                    
+                                    
+                                 </div>
+                                 <div class="range" data-ng-if="submitted_multiple && multiple_widget_form.start.$invalid || submitted_multiple && multiple_widget_form.end.$invalid">
+                                    <span class="validationError" data-ng-if="submitted_multiple && multiple_widget_form.start.$invalid || multiple_widget_form.end.$invalid">
+                                        Enter start range and end range
+                                    </span>
+                                 </div>
+                                 <span class="validationError" data-ng-if="submitted_multiple && invalid_range">Start range must be greater than end range</span> 
+                                </div>
+                                <div class="form-group">
+                                <label for="address" class="label_center label_left">Description</label>
+                                 <input type="text" size="40rem" class="form-control input_box_widget" id="address" data-ng-model="multiple_widget.widgetText" name="widgetText">
+                                    <span class="validationError" data-data-ng-if="submitted_multiple && multiple_widget_form.widgetText.$invalid">Enter widget description</span>
+                               </div>
+                            </div>
+                           <div class="full-width button-contents">
+                             <button class="col-md-6 btn btn-primary" data-ng-disabled="show_loading_multiple" type="submit">
+                             <span data-ng-hide="show_loading_multiple">CREATE</span>
+                              <span data-ng-show="show_loading_multiple">
+                                        Creating ...<i class="glyphicon glyphicon-refresh spinning"></i>
+                                    </span>
+
+                             </button>
+                             <button class="col-md-4 cancel_btn btn btn-primary" data-ui-sref="widgets.list">CANCEL</button>
+                           </div>
+                           </form>
+                        </div>
+
+                </div>
+            </div>
+</section>
+
+
+<!-- 
+<section class="widgets">
+    <div class="row page-title">
+        <span class="title">Widgets</span>
+        <span class="separator">|</span>
+        <span class="uppercase text-muted sub-title">Create/Edit Widget</span>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-xs-12">
+            <uib-tabset active='active'>
+                <uib-tab index="0">
+                    <uib-tab-heading>
+                        <i class='icon-pencil'></i>&nbsp;
+                        <span>Edit</span>
+                    </uib-tab-heading>
+                    <div class='document-type-container'>
+                        <div class="row document-type-details edit-tab">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="widgetName">Widget Name</label>
+                                    <input type="text" id="widgetName" name="widgetName" class="form-control" required ng-model='editWidgetController.widget.widgetName'
+                                        placeholder="Widget Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pickColor">Pick Color</label>
+                                    <input type="text" id="pickColor" name="pickColor" class="form-control" required ng-model='editWidgetController.widget.color'
+                                        colorpicker readonly="readonly" ng-change="editWidgetController.convertRGB()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="changeImage">Change Image</label>
+                                </div>
+                                <div class="form-group">
+                                    <img ngf-src="editWidgetController.fileSelected ? editWidgetController.picFile : editWidgetController.widget.imageUrl ? editWidgetController.widget.imageUrl : ''"
+                                        alt="" ngf-drop class="img-responsive" id="widgetImage">
+                                    <div class="form-group" ng-if="!editWidgetController.logo || !editWidgetController.isDisabled">
+                                        <button class="btn btn-primary btn-file btn-small" ngf-select="(editWidgetController.fileSelected = true) && (editWidgetController.loading = false)"
+                                            ng-model="editWidgetController.picFile" accept="image/*" ngf-before-model-change="editWidgetController.loading = true"
+                                            ngf-resize="{width: 100}" ngf-resize-if="$width > 100 || $height > 100">Upload Image</button>
+                                        <button class="btn btn-default btn-small" ng-show='editWidgetController.fileSelected' ng-click="editWidgetController.restoreDefault()">Restore Default</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="changeText">Change Text</label>
+                                    <input type="text" id="changeText" name="changeText" class="form-control" required ng-model='editWidgetController.widget.widgetText'
+                                        placeholder="Ask me anything">
+                                </div>
+                                <button class="btn btn-primary btn-large" ng-show='!editWidgetController.widget._id' ng-click="editWidgetController.saveWidget()">Save</button>
+                                <button class="btn btn-primary btn-large" ng-show='editWidgetController.widget._id' ng-click="editWidgetController.saveWidget()">Update</button>
+                                <button class='btn btn-default' ui-sref='widgets.list'>
+                                    Cancel
+                                </button>                                
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group preview">
+                                    <label for="preview">Preview</label>
+                                    <div class="preview-content">
+                                        <img ngf-src="editWidgetController.fileSelected ? editWidgetController.picFile : editWidgetController.widget.imageUrl ? editWidgetController.widget.imageUrl : ''"
+                                            alt="" ngf-drop class="img-responsive">
+                                        <span ng-style="{'color': editWidgetController.widget.color}">{{editWidgetController.widget.widgetText}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right copy-link">
+                                    <a href='#' ngclipboard data-clipboard-text="{{editWidgetController.chatUrl}}"> Copy Link </a>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="1" ng-click="editWidgetController.showDocumentDetails('email')">
+                    <uib-tab-heading>
+                        <i class='icon-envelope'></i>&nbsp;
+                        <span>Share via Email</span>
+                    </uib-tab-heading>
+                    <div class="document-type-container">
+                        <div class="document-type-details">
+                            <h3>Follow the following instructions to insert email signature</h3>
+                            <div class="document-instructions">
+                                <ol>
+                                    <li> Select the below signature preview (Command+A) and Copy (Command+C). On other broswers
+                                        where you cannot select the content by highlighting it, go to Edit > Select All and
+                                        then Edit > Copy </li>
+                                    <li>
+                                        In Gmail, you may see a Machine Bearing icon on the upper right hand side. In the drop down menu, go to Settings.
+                                    </li>
+                                    <li>Under the General tab in Settings, scroll down till you find the Signature section. Click
+                                        inside the Signature edit box and go to Edit > Paste to paste in the HTML you have
+                                        stored in the clipboard (Command+V). Click â€œSave Changesâ€� right below the Signature
+                                        edit box.</li>
+                                </ol>
+                            </div>
+                            <div class="signature-preview horizontal-centered">
+                                <table cellspacing='0' cellpadding='0' border-spacing='0'>
+                                    <tr>
+                                        <td style="margin:0;padding:0;">
+                                            <a href='{{editWidgetController.chatUrl}}' title="Image" style="border:none;text-decoration:none;" target="_blank">
+                                                <img src='{{editWidgetController.logoUrl}}' alt="" style="border:none;max-width:5rem;">
+                                            </a>
+                                        </td>
+                                        <td style="margin:0; padding:0; padding-left: 10px; font-family:'Lucida Grande',sans-serif;white-space:nowrap;font-size:16px;">
+                                            <a href='{{editWidgetController.chatUrl}}' style="border:none;text-decoration:none;color:{{editWidgetController.widget.color}}"
+                                                target="_blank"><span style="color: {{editWidgetController.widget.color}}">{{editWidgetController.widget.widgetText}}</span></a>
+                                            <div class='branding'>Powered by InstaConnect</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="2" id="instructions"  ng-click="editWidgetController.showDocumentDetails('document')">
+                    <uib-tab-heading>
+                        <i class='icon-docs'></i>&nbsp;
+                        <span>Share via Document</span>
+                    </uib-tab-heading>
+                    <div class="document-type-container">
+                        <div class="document-type-details">
+                            <h3>Follow the below instructions to insert widget in your document</h3>
+                            <button class="btn btn-default" tooltip-placement="bottom" ngclipboard data-clipboard-text="{{editWidgetController.logoUrl}}"><i class='fa fa-clipboard'></i> Copy Image URL</button>
+                            <button class="btn btn-default" tooltip-placement="bottom" ngclipboard data-clipboard-text="{{editWidgetController.chatUrl}}"><i class='fa fa-clipboard'></i> Copy Chat URL</button>
+                            <div class="document-instructions">
+                                <ol>
+                                    <li>In your word document, place the cursor where you want insert the widget</li>
+                                    <li>
+                                        Click on Insert tab and select Pictures. A pop up will appear in "File name" field enter - '{{editWidgetController.logoUrl}}'
+                                        (without quotes) or click on Copy Image URL button above
+                                    </li>
+                                    <li>Click on Insert button, it will insert the widget image in your document.</li>
+                                    <li>
+                                        Click on widget image and click on Insert tab and select Hyperlink. An "Insert Hyperlink" pop up menu will appear, in "Address"
+                                        field enter - {{editWidgetController.chatUrl}} or click on Copy Chat URL button above
+                                        and click on OK button
+                                    </li>
+                                    <li>
+                                        Right click on your image and select Wrap text option and select Square option from menu.
+                                    </li>
+                                    <li>
+                                        Add the text {{editWidgetController.widget.widgetText}} beside the image. To make text vertically center align, select the
+                                        image and drag image to align it properly so that the text should be visible vertically
+                                        aligned.
+                                    </li>
+                                    <li>
+                                        Select the text and click on Insert tab and select Hypderlink. An "Insert Hyperlink" pop up menu will appear, in "Address"
+                                        field enter - {{editWidgetController.chatUrl}} and click on OK button
+                                    </li>
+                                    <li>
+                                        Select the text and from Home tab remove the underline by clicking on U menu item.
+                                    </li>
+                                    <li>
+                                        From Home tab select A menu item and select More Colors option. A color pop up will appear, select the custom tab and enter
+                                        values {{editWidgetController.rgbColor}} and click on OK button
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index='3' ng-click="editWidgetController.showDocumentDetails('web')">
+                    <uib-tab-heading>
+                        <i class='icon-screen-desktop'></i>&nbsp;
+                        <span>Share via Website</span>
+                    </uib-tab-heading>
+                    <div class="document-type-container">
+                            <div class="document-type-details">
+                                <h3>Copy the below html code and Paste it in your website</h3>
+                                <button class="copy-button" tooltip-placement="bottom" uib-tooltip="Click to copy!" ngclipboard data-clipboard-target="#bar">Copy</button>
+                                <pre>
+                                    <code class="language-markup" prism id='bar'>
+&lt;div style="position: absolute; right: 2rem; bottom: 2rem; display: flex; background-color: #fff; border:1px solid #cfcfcf; padding: 5px;border-radius: 10px; box-shadow: 1px 1px 1px #cfcfcf; align-items: center; min-height: 6vh; max-width: 20vw;"&gt;
+    &lt;div&gt;
+        &lt;a href="{{editWidgetController.chatUrl}}" target="_blank"&gt;
+            &lt;img src="{{editWidgetController.logoUrl}}" style="max-width: 3rem;"/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; padding-left:5px; padding-right:5px;"&gt;
+        &lt;a href="{{editWidgetController.chatUrl}}" style="text-decoration: none; color: {{editWidgetController.widget.color}}" target="_blank"&gt;
+            &lt;span&gt;{{editWidgetController.widget.widgetText}}&lt;/span&gt;
+            &lt;div style="font-size: 8px; padding-top: 3px;"&gt;Powered by InstaConnect&lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                            </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</section> -->

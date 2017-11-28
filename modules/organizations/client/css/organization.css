@@ -1,0 +1,182 @@
+@font-face {
+  font-family: 'Avenir-Light';
+  src: url('/modules/core/client/css/fonts/avenir-light.eot?#iefix') format('embedded-opentype'), url('/modules/core/client/css/fonts/avenir-light.woff') format('woff'), url('/modules/core/client/css/fonts/avenir-light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Avenir-Book';
+  src: url('/modules/core/client/css/fonts/AvenirLTStd-Book.otf') format('otf'), url('/modules/core/client/css/fonts/avenir-book.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Avenir-Roman';
+  src: url('/modules/core/client/css/fonts/avenir-roman.eot?#iefix') format('embedded-opentype'), url('/modules/core/client/css/fonts/avenir-roman.woff') format('woff'), url('/modules/core/client/css/fonts/avenir-roman.ttf') format('truetype');
+}
+html {
+  font-size: 14px;
+}
+body {
+  font-family: 'Avenir-Book';
+  background-color: #FFFFFF;
+}
+h1 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1rem;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.btn-primary {
+  color: #FFFFFF;
+  background-image: none;
+  background-color: #32AEDE;
+  border-color: transparent;
+  font-size: 1rem;
+  border-radius: 2px;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #2A92BA;
+  border-color: transparent;
+}
+.btn-large {
+  font-size: 1.1rem;
+}
+.btn-login {
+  height: 6vh;
+  font-size: 1rem;
+  width: 13vw;
+  font-family: 'Avenir-Light';
+  font-weight: bold;
+}
+.btn-default {
+  font-size: 1rem;
+}
+.btn-small {
+  font-size: 0.9rem;
+}
+.btn-full-width {
+  width: 100%;
+}
+.btn-big {
+  width: 12vw;
+  height: 5vw;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Avenir-Roman';
+  font-size: 1.2rem;
+}
+.btn-gray {
+  background-color: #606B7F;
+  width: 12vw;
+  height: 5vw;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Avenir-Roman';
+  font-size: 1.2rem;
+}
+.btn-gray:hover,
+.btn-gray.selected,
+.btn-gray:focus {
+  background-color: #606B7F;
+}
+.organization .text-muted {
+  color: #78909C;
+}
+.organization .let-get-start-txt {
+  color: #547c90;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.organization .outer-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.organization .outer-box .main {
+  height: 70vh;
+  /*width: 50vw;*/
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  box-shadow: 0 1px 2px #AAAAAA;
+}
+.organization .outer-box .form_main {
+  height: 70vh;
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 1px solid #ffffff;
+}
+.organization .outer-box .label_center {
+  width: 100% !important;
+  text-align: center !important;
+  color: #757575;
+}
+.organization .outer-box .et-input-box {
+  border-radius: 0px !important;
+  height: 4rem;
+}
+.organization .outer-box .logo {
+  width: auto;
+  height: 12vh;
+  margin-bottom: 2rem;
+}
+.organization .outer-box .logo-blank {
+  width: 12vh;
+  height: 12vh;
+  border: 1px solid grey;
+  margin-bottom: 2rem;
+}
+.organization .outer-box .header_text {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #32AEDE;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.organization .outer-box .estalishment-btn {
+  background-color: #ffffff;
+  border: 1px solid #32AEDE;
+  color: #32AEDE;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 1rem;
+  cursor: pointer;
+  border-radius: 0px !important;
+  height: 3rem;
+  width: 10vw;
+}

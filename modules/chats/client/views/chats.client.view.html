@@ -1,0 +1,76 @@
+<div class="row chats">
+    <div data-ng-show="chatsController.showChat">
+        <insta-connect-chat user='chatsController.userResponse' prospects='chatsController.prospects'></insta-connect-chat>
+    </div>
+
+
+    <div class="chat_requests_container" data-ng-hide="chatsController.showChat">
+        <div class="fr_list_container">
+            <div class="server_div">
+                <div class="your_server_label">
+                    Your server for tonight is
+                </div>
+                <div class="server_name">
+                    {{chatsController.user.displayName}}
+                </div>
+            </div>
+            <div class="row" data-ng-repeat="request in chatsController.requestList | orderBy: 'positionId'">
+                <div class="col-md-12 col-xs-12 chat_requests_div" data-ng-click="chatsController.sendFrequentRequest(request,request_$index)">
+                    <div class="col-md-12 col-xs-12 chat-request-content">
+                        <div class="col-md-2 col-xs-3 full-height vertical-centered">
+                            <img class="img-responsive request_logo" src="{{request.imageUrl}}" data-ng-if="request.imageUrl">
+                            <img class="img-responsive request_logo" src="/modules/frequentRequest/client/img/default_frequent_request.png" data-ng-if="!request.imageUrl">
+                        </div>
+                        <div class="col-md-10 col-xs-9 requests_list no-padding">
+                            <label>
+                                {{request.title}}
+                            </label>
+                            <p>
+                                {{request.message}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_cotainer vertical-centered horizontal-centered">
+            <div class="go-to-chat" data-ng-click="chatsController.goToChat()">Go To Chat</div>
+        </div>
+    </div>
+    
+    <!--<div class="row signin horizontal-centered vertical-centered" ng-hide="chatsController.showChat">
+        <div class="user-details-container">
+            <h3>Tell us who you are</h3>
+            <form name="chatsController.userForm" ng-submit="chatsController.createProspects(chatsController.userForm.$valid)" novalidate
+                autocomplete="off">
+                <fieldset>
+                    <div class="form-group" show-errors>
+                        <uib-alert type="danger" ng-show="chatsController.error" class="text-center text-danger">
+                            <span ng-bind="chatsController.error"></span>
+                        </uib-alert>
+                        <label for="name">Display Name</label>
+                        <input type="text" id="displayName" name="displayName" class="form-control" ng-model="chatsController.prospects.name" placeholder=""
+                            autofocus>
+                        <div ng-messages="chatsController.userForm.email.$error" role="alert">
+                            <p class="help-block error-text" ng-message="required">Display Name is required.</p>
+                        </div>
+                    </div>-->
+                    <!--<div class="form-group" show-errors>
+            <uib-alert type="danger" ng-show="chatsController.error" class="text-center text-danger">
+              <span ng-bind="chatsController.error"></span>
+            </uib-alert>
+            <label for="name">Email</label>
+            <input type="email" id="email" name="email" class="form-control" ng-model="chatsController.prospects.email" placeholder="">
+            <div ng-messages="chatsController.userForm.email.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Email is required.</p>
+            </div>
+          </div>-->
+                    <!--<div class="text-center form-group">
+                        <button type="submit" class="btn btn-primary btn-login">Chat</button>
+                    </div>
+                    <br />
+                </fieldset>
+            </form>
+        </div>
+    </div>-->
+</div>

@@ -1,0 +1,296 @@
+@import "variables.less";
+
+body { 
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.no-container {
+  margin: 0px;
+  padding: 0px;
+}
+
+.content {
+    position: absolute;
+    top: @top-bar-height;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - @top-bar-height);
+    background-color: @app-bg-color;
+}
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.header-profile-image {
+  border-radius: 50%;
+  height: 28px;
+  margin-right: 5px;
+  opacity: 0.8;
+  width: 28px;
+}
+.open .header-profile-image,
+a:hover .header-profile-image {
+  opacity: 1;
+}
+.user-header-dropdown-toggle {
+  color: @black-color;
+}
+.user-primary-account {
+  font-size: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.error-text {
+  display: none;
+}
+.has-error .help-block.error-text {
+  display: block;
+}
+.has-error .help-inline.error-text {
+  display: inline;
+}
+
+.navbar {
+  border: 1px solid @nav-border-color;
+  background-color: @white-color;
+
+  .dropdown-menu {
+    background-color: @nav-menu-color;
+
+    > .active {
+      > a {
+        background-color: @blue-color;
+        background-image: none;
+        color: @white-color;
+      }
+    }
+
+    > li > a {
+      color: @muted-text-color;
+      &:hover {
+        background-color: @blue-color;
+        background-image: none;
+        color: @white-color;
+      }
+    }
+  }
+}
+
+.page-title {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    word-spacing: 1rem;
+    margin-left: 0px;
+    margin-right: 0px;
+
+    .title {
+        font-family: 'Avenir-Roman';
+        text-transform: uppercase;
+    }
+
+    .separator {
+        font-size: 2rem;
+        font-weight: 100;
+        font-weight: 100;
+        font-family: 'Avenir-Light';
+    }
+
+    .sub-title {
+        word-spacing: 0;
+        font-size: 1rem;
+        font-family: 'Avenir-Roman';
+    }     
+}
+
+.text-muted {
+    color: @muted-text-color;
+}
+
+.vertical-centered{
+	display: flex;
+    align-items: center;
+}
+
+.horizontal-centered{
+	display: flex;
+  justify-content: center;
+}
+
+.col-flex-direction{
+  flex-direction: column;
+}
+
+.navbar-brand {
+  > img {
+    position: fixed;
+    top: 6px;
+    left: 7px;
+    width: 3rem;
+  }
+}
+
+.bg-color {
+  background-color: @light-gray;
+}
+
+.caret {
+  color: @border-color;
+}
+
+.navbar-toggle {
+  border: 1px solid @border-color;
+
+  .icon-bar {
+    background-color: @border-color;
+  }
+}
+
+.navbar-nav {
+  li {
+      a {
+        font-size: 1rem;
+        color: @muted-text-color;
+        font-family: 'Avenir-Roman';
+
+        &:hover {
+          cursor: pointer;
+          border-bottom: 3px solid @white-hover-color;
+        }
+      }
+  }
+  .active {
+    border-bottom: 3px solid @blue-color;
+      a  {
+        color: @blue-color;
+        &:hover {
+          cursor: pointer;
+          border:none;
+      }
+    }
+  }
+}
+
+.nav {
+  .open {
+    a {
+      border:none;
+
+      &:hover, &:focus {
+        border: none;
+      }
+    }
+  }
+}
+
+.user-details {
+  padding: 0px;
+
+  .form-group {
+    margin-bottom: 29px;  
+  }
+
+  .profile-image {
+    img {
+      margin-bottom: 10px;
+      max-width: 5rem;
+    }
+  }
+}
+
+.chat-absolute {
+  position: absolute;
+  width: 70vw;
+  right: 0px;
+  bottom: 0px;
+}
+
+.truncate-text {  
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#drop-down-menu {
+  li {
+    border: none;
+  }
+}
+
+.gray-tooltip {
+  background-color: @light-gray;
+  color: @muted-text-color;
+}
+
+#sign-in-header {
+ li {
+      a {
+        &:hover {
+          cursor: pointer;          
+          border-bottom: none;
+        }
+      }
+  }
+}
+
+.notification-icon {
+  color: @blue-color;
+  font-size: 8px;
+  top: 0px;
+}
+
+.no-conversations {
+  height: 70vh;
+  font-size: 1rem;
+  font-family: 'Avenir-Roman';
+  color: @muted-text-color;
+}
+
+.vertical-align {
+    vertical-align: middle !important;
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 990px) {
+  .chat-absolute {
+    width: 100vw;
+  }
+}
+
+@media (max-width: 900px) {
+  html { font-size: 15px; }
+}
+@media (max-width: 400px) {
+  html { font-size: 13px; }
+}
+@media only screen and (device-width: 768px) {
+  
+
+  html { font-size: 13px; }
+  .box-height-sm {
+    height: 54vh !important;
+    width: 75% !important;
+  }
+  .content {
+    top: 0vh !important;
+    height: calc(100vh - @top-bar-height);
+  }
+}

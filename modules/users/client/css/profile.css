@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'Avenir-Light';
+  src: url('fonts/AvenirLTStd-Light.otf') format('otf');
+}
+@font-face {
+  font-family: 'Avenir-Book';
+  src: url('fonts/AvenirLTStd-Book.otf') format('otf');
+}
+@font-face {
+  font-family: 'Avenir-Roman';
+  src: url('fonts/AvenirLTStd-Roman.otf') format('otf');
+}
+html {
+  font-size: 14px;
+}
+body {
+  font-family: 'Avenir-Book';
+  background-color: #FFFFFF;
+}
+h1 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1rem;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.btn-primary {
+  color: #FFFFFF;
+  background-image: none;
+  background-color: #32AEDE;
+  border-color: transparent;
+  font-size: 1rem;
+  border-radius: 2px;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #2A92BA;
+  border-color: transparent;
+}
+.btn-login {
+  height: 2.5rem;
+  font-size: 1rem;
+}
+.btn-default {
+  font-size: 1rem;
+}
+.btn-small {
+  font-size: 0.9rem;
+}
+.profile label {
+  color: #78909C;
+}

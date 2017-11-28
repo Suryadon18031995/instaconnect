@@ -1,0 +1,232 @@
+<div class="home container no-margin full-width" data-ng-hide="homeController.showLoading" data-ng-init="homeController.initFunctionHome()">
+  <div class="landing-container row vertical-centered horizontal-centered" id="signup-container">
+    <div class='col-xs-12 col-md-5'>
+      <div class="signup-container rounded-border" data-ng-controller="AuthenticationController as vm">
+        <h3 class='centered'>Sign Up For Free</h3>
+        <form name="vm.userForm" data-ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+          <fieldset>
+            <div class="form-group" data-show-errors>
+              <input type="text" id="name" name="name" class="form-control" data-ng-model="vm.credentials.name" placeholder="Full Name" required
+              autofocus>
+              <div data-ng-messages="vm.userForm.name.$error" role="alert">
+                <p class="help-block error-text" data-ng-message="required">Please enter your name</p>
+              </div>
+            </div>
+            <div class="form-group" data-show-errors>
+              <input type="email" id="email" name="email" class="form-control" data-ng-model="vm.credentials.email" placeholder="Email" data-ng-readonly="vm.setReadOnly" required>
+              <div data-ng-messages="vm.userForm.email.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+              </div>
+            </div>
+            <div class="form-group" show-errors>
+              <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password"
+              password-validator ng-minlength="5" ng-maxlength="30" required>
+              <div ng-messages="vm.userForm.password.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Password is required.</p>
+            <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+            <p class="help-block error-text" ng-message="maxlength">Password is too long.</p>
+              </div>
+            </div>
+            <div class="text-center form-group">
+              <button type="submit" class="btn btn-primary btn-login btn-full-width">Get Started</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>		
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="home container no-margin full-width" ng-hide="homeController.showLoading" ng-init="homeController.initFunctionHome()">
+  <div class="landing-container row" id="signup-container">
+    <div class='col-xs-12 col-sm-9 left-col hidden-xs'>
+        <h3>
+          Why give your Phone number, when you can "InstaConnect"
+        </h3>
+        <div class="action-button" ng-controller="HomeController as homeController">
+          <button class="btn btn-primary btn-big" ng-click="homeController.moveScrollDown('howItWorks', 1)"> How It Works </button>
+        </div>
+    </div>
+    <div class='col-xs-12 col-sm-3 right-col'>
+      <div class='loading-spinner' ng-show="homeController.showLoading">
+            <span us-spinner spinner-theme="graySpinner"></span>
+        </div>
+			<div class="signup-container" ng-controller="AuthenticationController as vm" ng-hide="vm.showCamera">
+				<h3 class='centered'>Sign Up For Free</h3>
+				<form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+					<fieldset>
+						<div class="form-group" show-errors>
+							<input type="text" id="name" name="name" class="form-control" ng-model="vm.credentials.name" placeholder="Full Name" required
+							 autofocus>
+							<div ng-messages="vm.userForm.name.$error" role="alert">
+								<p class="help-block error-text" ng-message="required">Please enter your name</p>
+							</div>
+						</div>
+						<div class="form-group" show-errors>
+							<input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="Email" required>
+							<div ng-messages="vm.userForm.email.$error" role="alert">
+								<p class="help-block error-text" ng-message="required">Email address is required.</p>
+								<p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+							</div>
+						</div>
+						<div class="form-group" show-errors>
+							<input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password"
+							password-validator ng-minlength="5" ng-maxlength="30" required>
+							<div ng-messages="vm.userForm.password.$error" role="alert">
+								<p class="help-block error-text" ng-message="required">Password is required.</p>
+                <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+                <p class="help-block error-text" ng-message="maxlength">Password is too long.</p>
+							</div>
+						</div>
+						<div class="text-center form-group">
+							<button type="submit" class="btn btn-primary btn-login btn-full-width">Get Started</button>
+						</div>
+					</fieldset>
+				</form>
+			</div> -->
+			<!-- <div class="join-container" ng-controller="HomeController as homeController" ng-hide="homeController.showCamera">
+				<div>
+					<h3 class='centered'> Enter 9 Digit Code From Table </h3>
+				</div>
+				<div class="input-container">
+					<input type="text" id="conversation_code" class='form-control' placeholder="Enter 9 Digit Code" ng-model="homeController.conversationCode"></div>
+				<div>
+					<button type="submit" class="btn btn-primary btn-login btn-full-width" ng-click="homeController.joinConversation()">Enter</button>
+				</div>
+				<div>
+					<h3 class='scan-qr-code centered' ng-click="homeController.startScan()">Scan QR Code</h3>
+				</div>
+			</div>
+    	<div class="qrcode" ng-controller="qrCodeController">
+          <div class="row">
+            <button class="btn btn-primary cancel-btn" ng-show="
+            cameraRequested" ng-click="closeScanning()">Cancel</button>
+                <bc-qr-reader active="cameraRequested" on-result="processURLfromQR" on-error="onError" camera-status="cameraIsOn" width="400px" height="250px"></bc-qr-reader>
+          </div>
+      </div> -->
+	  <!-- </div>
+  </div> -->
+
+  <!-- <div class="how-it-works row hidden-xs" id="howItWorks">
+    <div class="text-content horizontal-centered vertical-centered">
+      <div class="title-text">
+        How It Works
+      </div>
+    </div>
+    <div class="steps horizontal-centered vertical-centered">
+      <div class="step">
+        <div class="step-icon">
+          <i class="icon-user"></i>
+        </div>
+        <div class="step-title">Register</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <i class="icon-settings"></i>
+        </div>
+        <div class="step-title">Create a Widget</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <i class="icon-share"></i>
+        </div>
+        <div class="step-title">Share InstaConnect ID with Prospects</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <i class="icon-cloud-download"></i>
+        </div>
+        <div class="step-title">Download Mobile App</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <i class="icon-envelope"></i>
+        </div>
+        <div class="step-title">Start Receiving inquiries</div>
+      </div>
+    </div>
+    <div class="action-button" ng-controller="HomeController as homeController">
+      <button class="btn btn-primary btn-gray" ng-click="homeController.moveScrollDown('signup-container', 0)"> Sign Up </button>
+    </div>
+  </div>
+  <div class="section-one row hidden-xs">
+    <div class="text-content horizontal-centered vertical-centered">
+      <div class="title-text">
+        You are a Sales Rep. Your prospects want your help but want to stay anonymous until they feel comfortable to share their
+        identity. Use InstaConnect in your signature, provide timely insights to your prospects and convert your prospects
+        into customers like a champion
+      </div>
+      <div class="action-button" ng-controller="HomeController as homeController">
+        <button class="btn btn-primary btn-big" ng-click="homeController.moveScrollDown('signup-container', 0)"> Sign Up </button>
+      </div>
+
+    </div>
+  </div>
+  <div class="section-two row hidden-xs">
+    <div class="text-content horizontal-centered vertical-centered">
+      <div class="title-text">
+        You have a Yoga studio and you post ads in various sites along with your phone number but you are afraid of creeps and letting
+        go of your phone number. Use InstaConnect instead and not have expose your personal phone number with strangers
+      </div>
+      <div class="action-button" ng-controller="HomeController as homeController">
+        <button class="btn btn-primary btn-gray" ng-click="homeController.moveScrollDown('signup-container', 0)"> Sign Up </button>
+      </div>
+
+    </div>
+  </div>
+  <div class="section-three row hidden-xs">
+    <div class="text-content horizontal-centered vertical-centered">
+      <div class="title-text">
+        You are Single. You meet a cute guy in the bar - you want him to call but you are not sure if he is a stalker. In your dilemma,
+        think InstaConnect - you stay safe when somebody connects you on InstaConnect because when you have no need for the
+        connection, you simply delete the widget
+      </div>
+      <div class="action-button" ng-controller="HomeController as homeController">
+        <button class="btn btn-primary btn-big" ng-click="homeController.moveScrollDown('signup-container', 0)"> Sign Up </button>
+      </div>
+
+    </div>
+  </div> -->
+</div>
+<!-- Modal -->
+   <!-- <div class="modal fade" id="instructionModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">QR Scanner</h4>
+        </div>
+        <div class="modal-body">
+        <ul class="no-li">
+          <li>1) Use Google chrome QR scanner
+          </li>
+
+          <li>2) Use Apple wallet QR scanner
+              <ul>
+                  <li>
+                    Go to Apple wallet you will be presented with the explanation of passes menu and invitation to scan QR code.
+                  </li>
+                  <li>
+                    Tap Scan option and the QR scanner will launch
+                  </li>
+                  <li>
+                    After scan you will get an url open that url in the browser.
+                  </li>
+              </ul>
+          </li>
+          
+          <p>3) Use Any QR scanner app or Install from<a href="https://itunes.apple.com/in/app/qr-code-scanner-fastest-decoder-for-all-types-of-qr-codes/id483336864?mt=8"> here</a></p>
+        </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>  -->

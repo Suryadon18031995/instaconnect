@@ -1,0 +1,188 @@
+
+<section class="row full-height-section organization">
+   
+    <div class="header_text">
+        Welcome to Insta Connect    
+    </div>
+    <div class="row outer-box">
+        <div class="col-md-6 col-xs-10 col-sm-10 main">
+            <div class="let-get-start-txt">
+                Let's Get Started
+            </div>
+            <label class="label_center">
+                Upload Establishment Logo
+            </label>
+
+            
+            <div class="col-md-4 col-sm-4 col-xs-4 logo-blank vertical-centered" ng-if="!organizationsController.logo" 
+                ngf-select="organizationsController.setImage()"
+                ng-model="organizationsController.picFile" accept="image/*">
+                <img class="full-height img-responsive" src="/modules/organizations/client/img/image_upload_placeholder.png">
+            </div>
+
+            <img class="logo img-responsive" ngf-src="organizationsController.logo"
+                ng-model="organizationsController.picFile" accept="image/*"
+                ngf-select="organizationsController.setImage()"
+                ng-if="organizationsController.logo">
+            
+            <div class="form-group">
+            <label for="name" class="label_center">Name of your establishment</label>
+            <input type="text" size="40rem" class="form-control et-input-box" id="name" ng-model="organizationsController.organizationName" placeholder="Name of your establishment">
+            </div>
+            <div class="form-group">
+            <label for="address" class="label_center">Address</label>
+            <input type="text" g-places-autocomplete size="40rem" class="form-control et-input-box" id="address" ng-model="organizationsController.address" placeholder="Address">
+            </div>
+            <div class="no-padding">
+                <button class="estalishment-btn" ng-click="organizationsController.createOrganization()">Next</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- commented old organization flow -->
+
+
+<!--<section class="organization">
+    <div class="row page-title">
+        <span class="title">Organization</span>
+        <span class="separator">|</span>
+        <span class="uppercase text-muted sub-title">Manage Your Organization</span>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            <div class="form-group">
+                <label for="name">Organization Name</label>
+                <input type="text" id="name" name="name" class="form-control" required ng-model='organizationsController.organizationName'
+                    ng-disabled="organizationsController.isDisabled">
+            </div>
+            <div class="form-group">
+                <label for="name">Logo</label>
+            </div>
+            <div class="form-group">
+                <img ngf-src="organizationsController.fileSelected ? organizationsController.picFile : organizationsController.logo ? organizationsController.logo : ''"
+                    alt="{{organizationsController.organizationName}}" ngf-drop>
+                    <div class="form-group" ng-if="!organizationsController.logo || !organizationsController.isDisabled">
+                        <button class="btn btn-default btn-file" ngf-select="(organizationsController.fileSelected = true) && (organizationsController.loading = false)"
+                            ng-model="organizationsController.picFile" accept="image/*" ngf-before-model-change="organizationsController.loading = true"
+                            ngf-resize="{width: 100}" ngf-resize-if="$width > 100 || $height > 100">Upload Image</button>
+                    </div>
+            </div>
+            <div ng-show="organizationsController.fileSelected" class="text-center form-group">
+                <button class="btn btn-primary btn-small" ng-click="organizationsController.upload(picFile)">Use This Logo</button>
+                <button class="btn btn-default" ng-click="organizationsController.fileSelected = false">Cancel</button>
+            </div>
+            <div ng-show="organizationsController.fileSelected" class="progress text-center">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{organizationsController.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{organizationsController.progress}}%" ng-bind="organizationsController.progress + '%'">
+                    <span class="sr-only">{{organizationsController.progress}}% Complete</span>
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-show='!organizationsController.organization' ng-click="organizationsController.createOrganization()">Save</button>
+            <button class="btn btn-primary" ng-show='organizationsController.organization && organizationsController.isDisabled' ng-click="organizationsController.editOrganization()">Edit</button>
+            <button class="btn btn-primary" ng-show='!organizationsController.isDisabled' ng-click="organizationsController.updateOrganization()">Update</button>
+            <button class="btn btn-default" ng-show='!organizationsController.isDisabled' ng-click="organizationsController.cancelEdit()">Cancel</button>        
+        </div>
+    </div>
+    <div class="row members-container">
+        <div class="col-md-5 col-lg-5">
+            <div class="container">
+                <uib-tabset>
+                    <uib-tab index="0" heading="Members">
+                        <div class="pull-right"><i class="fa fa-plus-circle"></i> <a href='#' data-toggle="modal" data-target="#send-invite-modal"> Add Member </a></div>
+                        <div ng-if="organizationsController.members.length === 0">
+                            No members in your organization
+                        </div>
+                        <table st-table="organizationsController.members" class="table table-striped table-hover" ng-if="organizationsController.members.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="member in organizationsController.members">
+                                    <td>{{member.name}}</td>
+                                    <td ng-if="member.isOwner && member.isAdmin">Owner, Admin</td>
+                                    <td ng-if="!member.isOwner && member.isAdmin">Admin</td>
+                                    <td ng-if="!member.isOwner && !member.isAdmin">User</td>
+                                    <td ng-show="member.status === 'Active'"></td>
+                                    <td ng-show="member.status === 'Inactive'">{{member.status}}</td>
+                                    <td ng-show="!member.isOwner && !member.isAdmin && member.status === 'Active' "><i class="fa fa-ban" data-toggle='modal' data-target='#deactivate-user-invite-modal' ng-click="organizationsController.selectUser(member)"/></td>
+                                    <td ng-show="!member.isOwner && !member.isAdmin && member.status === 'Inactive'"></td>
+                                    <td ng-show="member.isOwner && member.isAdmin"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="modal fade" id="send-invite-modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Invite Member</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" id="name" name="name" class="form-control" required ng-model='organizationsController.memberName'>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Email</label>
+                                            <input type="email" id="email" name="email" class="form-control" required ng-model='organizationsController.memberEmail'>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" ng-click="organizationsController.inviteUser()">Invite</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="deactivate-user-invite-modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Deactivate User</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="name">Redirect Chats to </label><br/>
+                                            <select class="form-control" ng-model="organizationsController.redirectedUserId">
+                                                <option value="-1"> Select User </option>
+                                                <option ng-repeat="member in organizationsController.members" value="{{member.id}}" ng-if="member.id !== organizationsController.selectedUser && member.status === 'Active'">{{member.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" ng-click="organizationsController.deactivateUser()">Deactivate User</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Pending Invitations">
+                        <div ng-if="organizationsController.invitations.length === 0">
+                            No Pending Invitations
+                        </div>
+                        <table st-table="organizationsController.invitations" class="table table-striped table-hover" ng-if="organizationsController.invitations.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="invitation in organizationsController.invitations">
+                                    <td>{{invitation.name}}</td>
+                                    <td>{{invitation.email}}</td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</section>-->

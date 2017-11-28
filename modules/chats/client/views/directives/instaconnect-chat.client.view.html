@@ -1,0 +1,92 @@
+<div class="no-conversations horizontal-centered vertical-centered" data-ng-hide="instaConnectChatController.conversations.length > 0">
+    <span data-us-spinner data-spinner-theme="graySpinner" data-ng-show="instaConnectChatController.conversations === null"></span>
+    <div data-ng-show="instaConnectChatController.conversations.length === 0">
+        <img data-ng-src="/modules/conversations/client/img/no-conversations.svg" class="img-responsive">
+        <div class='text-center no-conversations-message'>
+            <h3>No Conversations</h3>
+            <h4 class='message'>Create and Share a widget to connect with more people</h4>
+            <button class='btn btn-primary' data-ui-sref="widgets.list"> My Rooms </button>
+        </div>
+    </div>
+</div>
+<div id="conversations-list" class="hidden-xs" data-ng-show="instaConnectChatController.Authentication.user && instaConnectChatController.conversations.length > 0">
+    <div class="conversations">
+        <div data-ng-repeat='conversation in instaConnectChatController.conversations' class="conversation-row" data-ng-click="instaConnectChatController.selectConversation(conversation)" data-ng-class="instaConnectChatController.conversationId === conversation.conversationId ? 'selected' :  ''" data-ng-hide="!conversation.conversationId">
+            <div class='basic-details'>
+                <div class="name">{{conversation.name}}</div>
+                <div class="last-message truncate-text">{{conversation.lastMessage}}</div>
+                <div class="campaign-name truncate-text" data-ng-hide="!conversation.campaignName">{{conversation.campaignName}}</div>
+            </div>
+            <div class="other-details">
+                <div class="timestamp" data-am-time-ago="conversation.timeStamp"></div>
+                <div class="img-container">
+                    <img data-ng-hide='!conversation.isInstaConnectUser' src='/modules/core/client/img/brand/logo.png' class="img-responsive" data-tooltip-placement="bottom" data-uib-tooltip="Verified User"/>
+                    <img data-ng-hide='!conversation.isRedirected' src='/modules/chats/client/img/redirect-message.png' class="img-responsive" data-tooltip-placement="bottom" data-uib-tooltip="Redirected Conversation"/>
+                </div>
+                <!--<div class='unread-notification' ng-show="conversation.unreadCount > 0"> {{conversation.unreadCount}} </div>-->
+            </div>
+        </div>
+        <div class='loading-message' data-ng-show="instaConnectChatController.conversations === null">
+            <span data-us-spinner data-spinner-theme="graySpinner"></span>
+        </div>
+        <div class='no-conversations-message' data-ng-show="instaConnectChatController.conversations.length === 0">
+            <img data-ng-src="/modules/conversations/client/img/no-conversations.svg" class="img-responsive">
+            <div class='text-center'>
+                <h3>No Conversations</h3>
+                <h4 class='message'> <a data-ui-sref="widgets.edit"> Create </a> and Share your widget to connect with more people</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="chat" data-ng-class="instaConnectChatController.Authentication.user ? 'chat-absolute' : 'horizontal-centered vertical-centered'" data-ng-show="instaConnectChatController.conversations.length > 0">
+    <div class="chat-container" id="autoscroll">
+        <div class="chat-title">
+            <!--<div class="profile-image">
+                <img ngf-src="instaConnectChatController.user.profileImageURL ? instaConnectChatController.user.profileImageURL === 'modules/users/client/img/profile/default.png' ? '/modules/core/client/img/brand/logo.png' : instaConnectChatController.user.profileImageURL : '/modules/core/client/img/brand/logo.png'"
+                    alt="" ngf-drop class="img-responsive" id="profileImage">
+            </div>-->
+            <div class="user-details">
+                <span class="title" data-ng-class="!instaConnectChatController.salesPersonStatus ? 'title-slide-down' : 'title-slide-up'">{{instaConnectChatController.user ? instaConnectChatController.user.displayName : instaConnectChatController.selectedConversation.name}}</span><br/>
+                <span class="sub-title user-status" data-ng-if="instaConnectChatController.salesPersonStatus === 'offline'"> Last Active - <span data-am-time-ago="instaConnectChatController.lastSeenTime"></span></span>
+                <span class="sub-title user-status" data-ng-if="instaConnectChatController.salesPersonStatus === 'online'"> Online </span>
+            </div>
+        </div>
+        <div class="messages-container" data-scroll-bottom="instaConnectChatController.messages">
+            <div class="horizontal-centered vertical-centered loading-message" data-ng-show="instaConnectChatController.messages === null">
+                <span data-us-spinner data-spinner-theme="graySpinner"></span>
+            </div>
+            <div class='message-content' data-ng-repeat="message in instaConnectChatController.messages" data-ng-class="!message.senderId ? 'pull-left' : message.senderId === instaConnectChatController.Authentication.user._id || message.senderId === instaConnectChatController.prospects._id ? 'pull-right own-message' : 'pull-left'">
+                <span class="sender-name">{{ message.senderName }}</span>
+                <span class="pull-right message-time" data-am-time-ago="message.timeStamp"></span><br/>
+                <div class="text-content">{{ message.content }}</div>
+            </div>
+        </div>
+        <div class="frequent-sender">
+            <div class="col-md-6 col-xs-6 vertical-centered horizontal-centered">
+                <div class="align-center" data-ng-click="instaConnectChatController.finishChat()">
+                    <div class="finish-button circle_button vertical-centered horizontal-centered">
+                        <i class="fa fa-check request-action-logo" aria-hidden=â€œtrueâ€�></i>
+                    </div>
+                    <div class="bottom-text">Finish</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6 vertical-centered horizontal-centered">
+                <div class="align-center" data-ng-click="instaConnectChatController.sendFrequentRequestDirective()">
+                    <div class="frequent-request-button circle_button vertical-centered horizontal-centered">
+                        <i class="fa fa-cutlery request-action-logo" aria-hidden=â€œtrueâ€�></i>       
+                    </div>
+                    <div class="bottom-text">Request</div>
+                </div>
+            </div>
+        </div>
+        <div class="message-sender">
+            <input type="text" class="textarea" placeholder="Type here.." data-ng-model='instaConnectChatController.newMessage' data-ng-keyup="$event.keyCode == 13 ? instaConnectChatController.sendMessage() : null" data-ng-focus="instaConnectChatController.AddDummyView()" data-ng-blur="instaConnectChatController.removeDummyView()">
+            <div class="vertical-centered horizontal-centered" data-ng-click='instaConnectChatController.sendMessage()'>
+                <div class="send-button circle_button vertical-centered horizontal-centered">
+                    <i class="fa fa-paper-plane send-logo" aria-hidden=â€œtrueâ€�></i>             
+                </div>
+            </div>
+        </div>
+        <div class="hidden-lg hidden-md" id="virtual_scroll"></div>
+    </div>
+</div>

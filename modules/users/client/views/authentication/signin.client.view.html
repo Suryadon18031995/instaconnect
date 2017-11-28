@@ -1,0 +1,34 @@
+<div class="row signin horizontal-centered vertical-centered full-height-section">
+  <div class="signin-container col-md-5 col-sm-8 col-xs-10">
+    <h3>Login</h3>
+    <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
+            <span ng-bind="vm.error"></span>
+          </uib-alert>
+          <input type="text" id="email" name="usernameOrEmail" class="form-control" ng-model="vm.credentials.email" placeholder="Email" required autofocus>
+          <div ng-messages="vm.userForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Email is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" required>
+          <div ng-messages="vm.userForm.password.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Password is required.</p>
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary btn-login btn-full-width">Login</button>
+        </div>
+        <div class="text-center forgot-password">
+          <a ui-sref="password.forgot">Forgot your password?</a>
+        </div>
+        <div class="text-center sign-up">
+          <a ui-sref="home">Sign Up</a>
+        </div>
+        <br />
+      </fieldset>
+    </form>
+  </div>
+</div>

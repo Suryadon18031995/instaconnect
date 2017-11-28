@@ -1,0 +1,66 @@
+<section class="servers full-width full-height-section vertical-centered horizontal-centered" ng-init="createServerController.addServerInit()">
+    
+    <div class="col-md-5 col-sm-9 col-xs-10 server_inner box-height-sm">
+                <div class="row col-flex-direction horizontal-centered">
+                        <div class="horizontal-centered">
+                                <img src="/modules/waiter/client/img/waiter.png" class="server-create-user-icon">
+                                
+                        </div>
+                        <div class="col-md-12 server-heading" >
+                                Add New Staff 
+
+                        </div>
+                        
+                </div>
+                
+                <div class="row server-height-50" >
+                        <div class="col-md-12 contents" >
+                          <form name="server_form" ng-submit="createServerController.addServer(server_form.$valid,createServerController.server)" novalidate>
+                            <div class="form-contents">
+                                <div class="form-group first-form">
+                                    <label for="name" class="server-label_center server-label_left">Name</label>
+                                    <input type="text" size="10rem" class="form-control input_box_server" id="name" ng-model="createServerController.server.name" name="serverName" required>
+                                    <span class="validationErrorServer" ng-if="submitted && server_form.serverName.$invalid">Enter server name</span>
+                                    
+                                </div>
+                                <div class="form-group">
+                                  <label for="address" class="server-label_center server-label_left">Email Address </label>
+                                  <input type="email" size="35rem" class="form-control input_box_server" id="address" ng-model="createServerController.server.email" name="serverEmail" required>
+                                  <span class="validationErrorServer" ng-if="submitted && server_form.serverEmail.$error.required">Enter email address</span>
+                                  <span class="validationErrorServer" ng-if="submitted && server_form.serverEmail.$error.email">Not valid email!</span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="address" class="server-label_center server-label_left">Phone Number</label>
+                                  <input type="text" class="form-control input_box_server" ng-model="createServerController.server.phoneNumber" mask="(999)-999-9999" name="serverNumber" restrict="reject" limit="true" validate="false" clean="false" required ng-minlength=14 ng-maxlength=14>
+                                  <!-- <input type="number" size="35rem" class="form-control input_box_server" id="address" ng-model="createServerController.server.phoneNumber" name="serverNumber" required ng-minlength=10 ng-maxlength=10> -->
+                                  <span class="validationErrorServer" ng-if="submitted && server_form.serverNumber.$error.required">Enter phone number</span>
+                                  <span class="validationErrorServer" ng-show="submitted && server_form.serverNumber.$error.minlength">Phone number is too short</span>
+                                  <span class="validationErrorServer" ng-show="submitted && server_form.serverNumber.$error.maxlength">Phone number is too long</span>
+                                </div>                                
+                            </div>
+                            <div class="full-width button-contents-server">
+                                <button type="submit" class="col-md-6 btn btn-primary" ng-disabled="show_loading" ng-if="!editMode">
+                                <span ng-hide="show_loading">CREATE</span>
+                                    <span ng-show="show_loading">
+                                        Creating ...<i class="glyphicon glyphicon-refresh spinning"></i>
+                                    </span>
+
+                                </button>
+                                <button type="submit" class="col-md-6 btn btn-primary" ng-disabled="show_loading" ng-if="editMode">
+                                 <span ng-hide="show_loading">UPDATE</span>
+                                <span ng-show="show_loading">
+                                        Updating ...<i class="glyphicon glyphicon-refresh spinning"></i>
+                                    </span>
+                                </button>
+                                <button class="col-md-4 cancel_btn btn btn-primary" ui-sref="server.list">CANCEL</button>
+                            </div>
+                          </form>
+                        </div>
+                       
+
+                </div>
+            </div>
+</section>
+
+
+                                 

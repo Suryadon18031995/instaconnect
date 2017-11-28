@@ -1,0 +1,112 @@
+<section class="servers" ng-init="serverController.waiterInitFunction()">
+	<div class="row server-header vertical-centered">
+		<div class="col-md-6 server-title">
+			<div class="title">Staff</div>
+		</div>
+		<div class="col-md-6 vertical-centered">
+			<div class="right-align">
+				<a ui-sref="server.add" class="undecorated-link span-center">
+                    <i class="icon-plus blue-color vetical-align" tooltip-placement="bottom" uib-tooltip="Add New Widget"></i>
+                    <span class="add-new-server vetical-align">Add New Staff</span>
+                </a>
+			</div>
+		</div>
+	</div>
+
+	<div class="full-height horizontal-centered" ng-if="serverController.serverList.length == 0">
+		<div class="empty-block">There are no staff here
+			<div class="horizontal-centered">
+				<a ui-sref="server.add" class="undecorated-link span-center">
+                    <span class="add-new-server vetical-align">Create a new one</span>
+                </a>
+			</div>
+		</div>
+	</div>
+	<div class="server-bottom" ng-if="serverController.serverList.length > 0">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<!--<th class="table-heading"></th>-->
+					<th class="table-heading-server">NAME</th>
+					<th class="table-heading-server">STATUS</th>
+					<th class="table-heading-server">ROOMS</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="waiter in serverController.serverList">
+
+					<!--<td class="no-border center-vertical">
+                        <i class="fa fa-check-circle green-color" aria-hidden="true"></i>
+                    </td> -->
+					<td class="server-column-border vertical-align">
+						<div class="row vertical-centered">
+							<div class="col-md-12 vertical-centered">
+								<i class="icon-user server-user-icon gray-color hidden-xs"></i>
+								<span>{{waiter.displayName}}</sapn>
+                            </div>
+                        </div> 
+                    </td> 
+
+                    <td class="server-column-border vertical-align" ng-if="waiter.userStatus">
+						<div class="row vertical-centered">
+							<div class="col-md-12 vertical-centered">
+								<img src="modules/waiter/client/img/green_circle.png" class="status-img img-responsive hidden-xs"/>
+								<span>Checked In</span>
+                            </div>
+                        </div> 
+					</td>
+					<td class="server-column-border center-vertical" ng-if="
+                    !waiter.userStatus">
+						<div class="row vertical-centered">
+							<div class="col-md-12 vertical-centered">
+								<img src="modules/waiter/client/img/red_circle.png" class="status-img img-responsive hidden-xs"/>
+								<span>Checked Out</span>
+                            </div>
+                        </div> 
+					</td>
+					<td class="server-column-border center-vertical">
+						<div class="server-selectize-div">
+							<span class="server-selectize-span">
+								<selectize  config='serverController.serverSelectizeConfig[waiter._id]' options="serverController.widgetList[waiter._id]" ng-model="waiter.widgetsAssigned"></selectize>
+							</span>
+							<span class="vertical-centered server-spinner-span">
+								<i class="selectize-spinner" ng-class="serverController.spinnerState[$index] === 1 ? 'fa fa-spinner fa-pulse fa-fw' : '' "></i>
+								<i class="selectize-spinner" ng-class="serverController.spinnerState[$index] === 2 ? 'fa fa-check' : '' "></i>
+							</span>
+						</div>
+					</td>
+					<td class="server-column-border center-vertical">
+						<a href='#' ui-sref="server.edit({serverId:waiter._id})">
+							<i class="icon-pencil gray-color" tooltip-placement="bottom" uib-tooltip="Edit server"></i>
+                        </a>
+					</td>
+					<td class="server-column-border center-vertical">
+						<a href='#' data-toggle="modal" data-target="#delete-server-info-modal" ng-click="serverController.selectWaiter(waiter)">
+                            <i class="icon-trash gray-color" tooltip-placement="bottom" uib-tooltip="Delete Server"></i>
+                        </a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		</div>
+
+		<div class="modal fade" id="delete-server-info-modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Delete Server</h3>
+					</div>
+					<div class="modal-body">
+						Are you sure, you want to delete server?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="serverController.deleteWaiter()">Delete</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+</section>

@@ -1,0 +1,162 @@
+<section class="widgets">
+    <div class="row page-title">
+        <span class="title">Campaign</span>
+        <span class="separator">|</span>
+        <span class="uppercase text-muted sub-title">Create New Campaign</span>
+    </div>
+    <!--<div class="row">-->
+    <!--Share the below url with customers <br/> <br/>{{widgetsController.chatUrl}}-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            <div class="form-group">
+                <label for="widgetName">Campaign Name</label>
+                <input type="text" id="campaignName" name="campaignName" class="form-control" required ng-model='createCampaignController.campaignName' placeholder="Campaign Name">
+            </div>
+            <!--<div class="form-group">
+                <label for="widgetName">Widget Name</label>
+                <input type="text" id="widgetName" name="widgetName" class="form-control" required ng-model='createWidgetController.widget.widgetName' placeholder="Widget Name">
+            </div>-->
+            <div class="form-group">
+                <label for="pickColor">Pick Color</label>
+                <input type="text" id="pickColor" name="pickColor" class="form-control" required ng-model='createCampaignController.widget.color'
+                    colorpicker readonly="readonly" ng-change="createCampaignController.convertRGB()">
+            </div>
+            <div class="form-group">
+                <label for="changeImage">Change Image</label>
+            </div>
+            <div class="form-group">
+                <img ngf-src="createCampaignController.fileSelected ? createCampaignController.picFile : createCampaignController.widget.imageUrl ? createCampaignController.widget.imageUrl : ''"
+                    alt="" ngf-drop class="img-responsive" id="widgetImage">
+                    <div class="form-group" ng-if="!createCampaignController.logo || !createCampaignController.isDisabled">
+                        <button class="btn btn-primary btn-file btn-small" ngf-select="(createCampaignController.fileSelected = true) && (createCampaignController.loading = false)"
+                            ng-model="createCampaignController.picFile" accept="image/*" ngf-before-model-change="createCampaignController.loading = true"
+                            ngf-resize="{width: 100}" ngf-resize-if="$width > 100 || $height > 100">Upload Image</button>
+                        <button class="btn btn-default btn-small" ng-show='createCampaignController.fileSelected' ng-click="createCampaignController.restoreDefault()">Restore Default</button>
+                    </div>                    
+                </div>
+            <div class="form-group">
+                <label for="changeText">Change Text</label>
+                <input type="text" id="changeText" name="changeText" class="form-control" required ng-model='createCampaignController.widget.widgetText'
+                    placeholder="Ask me anything">
+            </div>
+            <div class="form-group preview">
+                <label for="preview">Preview</label>
+                <div class="preview-content">
+                    <img ngf-src="createCampaignController.fileSelected ? createCampaignController.picFile : createCampaignController.widget.imageUrl ? createCampaignController.widget.imageUrl : ''"
+                        alt="" ngf-drop class="img-responsive">
+                        <span ng-style="{'color': createCampaignController.widget.color}">{{createCampaignController.widget.widgetText}}</span>
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-show='createCampaignController.widget._id === undefined' ng-click="createCampaignController.saveWidget()">Save</button>
+            <button class="btn btn-primary" ng-show='createCampaignController.widget._id !== undefined' ng-click="createCampaignController.saveWidget()">Update</button>
+        </div>
+        <div class="col-md-7 col-md-offset-2 col-lg-7 col-lg-offset-2 document-type-container">
+            <div class="document-type-icons-container">
+                <label class="text-muted">Get Document Type</label>
+                <div class="document-type-icons">
+                    <img ng-src="/modules/widgets/client/img/mail-open.png" alt="" ngf-drop class="img-responsive" ng-click="createCampaignController.showDocumentDetails('mail')"
+                        ng-class="createCampaignController.showEmail ? 'selected': 'not-selected'">
+                        <img ng-src="/modules/widgets/client/img/document.png" alt="" ngf-drop class="img-responsive" ng-click="createCampaignController.showDocumentDetails('document')"
+                            ng-class="createCampaignController.showDocument ? 'selected': 'not-selected'">
+                            <img ng-src="/modules/widgets/client/img/web.png" alt="" ngf-drop class="img-responsive" ng-click="createCampaignController.showDocumentDetails('web')"
+                                ng-class="createCampaignController.showWeb ? 'selected': 'not-selected'">
+                </div>
+            </div>
+            <div ng-show="createCampaignController.showEmail">
+                <div class="arrow-up"></div>
+                <div class="document-type-details">
+                    <span class="document-title">Follow the following instructions to insert email signature: </span>
+                    <div class="document-instructions">
+                        <ol>
+                            <li> Select the below signature preview (Command+A) and Copy (Command+C). On other broswers where
+                                you cannot select the content by highlighting it, go to Edit > Select All and then Edit >
+                                Copy </li>
+                            <li>
+                                In Gmail, you may see a Machine Bearing icon on the upper right hand side. In the drop down menu, go to Settings.
+                            </li>
+                            <li>Under the General tab in Settings, scroll down till you find the Signature section. Click inside
+                                the Signature edit box and go to Edit > Paste to paste in the HTML you have stored in the
+                                clipboard (Command+V). Click “Save Changes” right below the Signature edit box.</li>
+                        </ol>
+                    </div>
+                    <div class="signature-preview horizontal-centered">
+                        <table cellspacing='0' cellpadding='0' border-spacing='0'>
+                            <tr>
+                                <td style="margin:0;padding:0;">
+                                    <a href='{{createCampaignController.chatUrl}}' title="Image" style="border:none;text-decoration:none;" target="_blank">
+                                        <img src='{{createCampaignController.logoUrl}}' alt="" style="border:none;width:5rem;height:5rem;">
+                                    </a>
+                                </td>
+                                <td style="margin:0; padding:0; padding-left: 10px; font-family:'Lucida Grande',sans-serif;white-space:nowrap;font-size:16px;">
+                                    <a href='{{createCampaignController.chatUrl}}' style="border:none;text-decoration:none;color:{{createCampaignController.widget.color}}"
+                                        target="_blank"><span style="color: {{createCampaignController.widget.color}}">{{createCampaignController.widget.widgetText}}</span></a>
+                                        <div class='branding'>Powered by InstaConnect</div>
+                                </td>                                
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="createCampaignController.showDocument">
+                <div class="arrow-center"></div>
+                <div class="document-type-details">
+                    <span class='document-title'>Follow the below instructions to insert widget in your document:</span>
+                    <button class="btn btn-default" tooltip-placement="right" ngclipboard data-clipboard-text="{{createCampaignController.logoUrl}}"><i class='fa fa-clipboard'></i> Copy Image URL</button>
+                    <button class="btn btn-default" tooltip-placement="right" ngclipboard data-clipboard-text="{{createCampaignController.chatUrl}}"><i class='fa fa-clipboard'></i> Copy Chat URL</button>
+                    <div class="document-instructions">
+                        <ol>
+                            <li>In your word document, place the cursor where you want insert the widget</li>
+                            <li>
+                                Click on Insert tab and select Pictures. A pop up will appear in "File name" field enter - '{{createCampaignController.logoUrl}}' (without quotes) or click on Copy Image URL button above
+                            </li>
+                            <li>Click on Insert button, it will insert the widget image in your document.</li>
+                            <li>
+                                Click on widget image and click on Insert tab and select Hyperlink. An "Insert Hyperlink" pop up menu will appear, in "Address" field enter - {{createCampaignController.chatUrl}} or click on Copy Chat URL button above and click on OK button
+                            </li>
+                            <li>
+                                Right click on your image and select Wrap text option and select Square option from menu.
+                            </li>
+                            <li>
+                                Add the text {{createCampaignController.widget.widgetText}} beside the image. To make text vertically center align, select the image and drag image to align it properly so that the text should be visible vertically aligned.
+                            </li>
+                            <li>
+                                Select the text and click on Insert tab and select Hypderlink. An "Insert Hyperlink" pop up menu will appear, in "Address" field enter - {{createCampaignController.chatUrl}} and click on OK button
+                            </li>
+                            <li>
+                                Select the text and from Home tab remove the underline by clicking on U menu item.
+                            </li>
+                            <li>
+                                From Home tab select A menu item and select More Colors option. A color pop up will appear, select the custom tab and enter values {{createCampaignController.rgbColor}} and click on OK button
+                            </li>
+                        </ol>
+                    </div> 
+                </div>
+            </div>
+            <div ng-show="createCampaignController.showWeb">
+                <div class="arrow-right"></div>
+                <div class="document-type-details">                    
+                    <span class="document-title">Copy the below html code and Paste it in your website</span>                    
+                     <button class="copy-button" tooltip-placement="right" uib-tooltip="Click to copy!" ngclipboard data-clipboard-target="#bar">Copy</button>
+                    <pre>
+                        <code class="language-markup" prism id='bar'>
+&lt;div style="position: absolute; right: 2rem; bottom: 2rem; display: flex; background-color: #fff; border:1px solid #cfcfcf; padding: 5px;border-radius: 10px; box-shadow: 1px 1px 1px #cfcfcf; align-items: center; min-height: 6vh; max-width: 20vw;"&gt;
+    &lt;div&gt;
+        &lt;a href="{{createCampaignController.chatUrl}}" target="_blank"&gt;
+            &lt;img src="{{createCampaignController.logoUrl}}" style="max-width: 3rem;"/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; padding-left:5px; padding-right:5px;"&gt;
+        &lt;a href="{{createCampaignController.chatUrl}}" style="text-decoration: none; color: {{createCampaignController.widget.color}}" target="_blank"&gt;
+            &lt;span&gt;{{createCampaignController.widget.widgetText}}&lt;/span&gt;
+            &lt;div style="font-size: 8px; padding-top: 3px;"&gt;Powered by InstaConnect&lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
